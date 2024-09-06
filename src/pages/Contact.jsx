@@ -13,7 +13,7 @@ const Contact = () => {
             <Row>
                 <Col md={6}>
                     <Form name="contact" method="POST" data-netlify="true">
-                        {/* <input type="hidden" name="form-name" value="contact" /> */}
+                        <input type="hidden" name="form-name" value="contact" />
 
                         <Form.Group controlId="formName">
                             <Form.Label>Name</Form.Label>
