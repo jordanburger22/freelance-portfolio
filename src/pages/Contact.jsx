@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Modal } from 'react-bootstrap';
-import linkedIn from '../assets/linkedin-app-white-icon.png';
+import linkedIn from '../assets/linkedin-app-white-icon.png'; // Ensure this is the correct path to your LinkedIn icon
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
@@ -25,7 +25,6 @@ const Contact = () => {
       }
     } catch (error) {
       alert("There was an error submitting the form.");
-      console.log(error)
     } finally {
       setIsSubmitting(false);
     }
@@ -79,9 +78,11 @@ const Contact = () => {
           <p>
             For professional updates and networking, feel free to connect with me on LinkedIn:
           </p>
-          <Button variant="dark">
-            <img className="linkedin-contact" src={linkedIn} alt="LinkedIn" />
-          </Button>
+          <a href="https://www.linkedin.com/in/jordan-burger/" target="_blank" rel="noopener noreferrer">
+            <Button variant="dark">
+              <img className="linkedin-contact" src={linkedIn} alt="LinkedIn" />
+            </Button>
+          </a>
         </Col>
       </Row>
 
