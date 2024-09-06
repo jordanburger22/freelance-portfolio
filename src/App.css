@@ -1,0 +1,158 @@
+.app {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-left: 10vw;
+    margin-right: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    margin-bottom: 5vh;
+    padding-bottom: 5vh;
+    color: white;
+}
+
+.navbar {
+    height: 5vh;
+    margin-left: 1vw;
+}
+
+.menu-button img {
+    width: 24px;
+    height: auto;
+}
+
+.menu-button {
+    padding: 0;
+    border: none;
+}
+
+/* Values.css */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100% !important;
+}
+
+.contact-link {
+    cursor: pointer;
+    color: #e0e0e0;
+    /* Light gray color for better contrast on a dark background */
+    text-decoration: underline;
+    /* Underline to mimic link appearance */
+    font-weight: normal;
+    /* Ensures the text isn't bold */
+}
+
+.contact-link:hover {
+    color: #ffffff;
+    /* White color on hover for maximum contrast */
+    text-decoration: underline;
+    /* Maintain underline on hover */
+}
+
+.contact-link:active {
+    color: #d0d0d0;
+    /* Slightly darker gray for active state */
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd; /* Optional: for a more defined card border */
+    border-radius: 8px; /* Optional: rounded corners for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow for a professional look */
+}
+
+.img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.proj-img {
+    width: 100%; /* Make sure the image covers the width of the container */
+    height: 100%; /* Make sure the image covers the height of the container */
+    object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+    transition: opacity 0.3s ease;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 10px; /* Position at the bottom of the container */
+    left: 50%;
+    transform: translateX(-50%); /* Center the button horizontally */
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%; /* Ensure the overlay covers the entire container */
+    height: 100%;
+}
+
+.project-card:hover .overlay {
+    opacity: 1;
+}
+
+.btn-live {
+    color: white;
+    background-color: #343a40; /* Bootstrap dark variant */
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-decoration: none; /* Remove underline */
+    text-align: center;
+}
+
+.github-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #343a40; /* Bootstrap dark variant */
+    color: white;
+    border: none; /* No border */
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.github-logo {
+    height: 24px; /* Adjust size as needed */
+    margin-right: 5px;
+}
+
+.project-container {
+    margin-bottom: 20px; /* Space between cards */
+}
+
+.banner-img{
+    border-radius: 50%;
+    filter: drop-shadow(7px 6px 4px #000000);
+}
+
+.portfolio{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+.values{
+    margin: 5vh;
+}
+
+.linkedin-contact{
+    width: 2vw;
+}
