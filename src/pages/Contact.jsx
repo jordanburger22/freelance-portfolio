@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import linkedIn from '../assets/linkedin-app-white-icon.png';
 
 const Contact = () => {
@@ -14,20 +14,34 @@ const Contact = () => {
 
       <Row>
         <Col md={6}>
-          <form
-            data-netlify="true"
-            name="contact"
-            method="post"
-            onSubmit='submit'
-            className="netlify-form"
+          <Form
+            name='contact'
+            method="POST"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="text" name="name" placeholder="Name" className="form-control" />
-            <input type="email" name="email" placeholder="Email" className="form-control" />
-            <input type="text" name="subject" placeholder="Subject" className="form-control" />
-            <textarea name="message" placeholder="Message" className="form-control"></textarea>
-            <button type="submit" className="btn btn-dark">Send</button>
-          </form>
+            <Form.Group controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" name="name" placeholder="Enter your name" />
+            </Form.Group>
+
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" name="email" placeholder="Enter your email" />
+            </Form.Group>
+
+            <Form.Group controlId="formSubject">
+              <Form.Label>Subject</Form.Label>
+              <Form.Control type="text" name="subject" placeholder="Enter the subject" />
+            </Form.Group>
+
+            <Form.Group controlId="formMessage">
+              <Form.Label>Message</Form.Label>
+              <Form.Control as="textarea" rows={4} name="message" placeholder="Your message" />
+            </Form.Group>
+
+            <Button variant="dark" type="submit">
+              Send
+            </Button>
+          </Form>
         </Col>
 
         <Col md={6}>
@@ -35,9 +49,7 @@ const Contact = () => {
           <p>
             For professional updates and networking, feel free to connect with me on LinkedIn:
           </p>
-          <Button type='sumbit' variant="dark" href="https://www.linkedin.com/in/your-profile" target="_blank">
-            <img className='linkedin-contact' src={linkedIn} alt="LinkedIn" />
-          </Button>
+            <Button variant="dark"><img className='linkedin-contact' src={linkedIn} alt="LinkedIn" /></Button>
         </Col>
       </Row>
     </Container>
@@ -45,3 +57,4 @@ const Contact = () => {
 };
 
 export default Contact;
+4
