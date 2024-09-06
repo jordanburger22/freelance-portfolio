@@ -32,14 +32,24 @@ const Contact = () => {
 
       <Row>
         <Col md={6}>
-          <Form
+          {/* Hidden HTML Form for Netlify */}
+          <form
             data-netlify="true"
             name="contact"
             method="post"
-            onSubmit={handleSubmit}
+            style={{ display: "none" }}
           >
             <input type="hidden" name="form-name" value="contact" />
+            <input type="text" name="name" placeholder="Name" />
+            <input type="email" name="email" placeholder="Email" />
+            <input type="text" name="subject" placeholder="Subject" />
+            <textarea name="message" placeholder="Message"></textarea>
+          </form>
 
+          {/* Visible React Form */}
+          <Form
+            onSubmit={handleSubmit}
+          >
             <Form.Group controlId="formName">
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" name="name" placeholder="Enter your name" />
@@ -79,3 +89,4 @@ const Contact = () => {
 };
 
 export default Contact;
+4
