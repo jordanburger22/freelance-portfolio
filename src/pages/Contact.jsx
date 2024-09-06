@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Modal } from 'react-bootstrap';
 import linkedIn from '../assets/linkedin-app-white-icon.png';
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,8 +20,12 @@ const Contact = () => {
         body: new URLSearchParams(formData).toString(),
       });
       setShowModal(true);
+      if (formRef.current) {
+        formRef.current.reset(); // Reset form fields
+      }
     } catch (error) {
       alert("There was an error submitting the form.");
+      console.log(error)
     } finally {
       setIsSubmitting(false);
     }
@@ -36,6 +41,7 @@ const Contact = () => {
       <Row>
         <Col md={6}>
           <Form
+            ref={formRef} // Add ref here
             name="contact"
             method="POST"
             onSubmit={handleSubmit}
