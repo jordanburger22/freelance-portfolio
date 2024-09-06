@@ -35,7 +35,7 @@ const Contact = () => {
           <p>
             For professional updates and networking, feel free to connect with me on LinkedIn:
           </p>
-          <Button variant="dark" href="https://www.linkedin.com/in/your-profile" target="_blank">
+          <Button type='sumbit' variant="dark" href="https://www.linkedin.com/in/your-profile" target="_blank">
             <img className='linkedin-contact' src={linkedIn} alt="LinkedIn" />
           </Button>
         </Col>
