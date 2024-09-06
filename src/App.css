@@ -156,3 +156,35 @@
 .linkedin-contact{
     width: 2vw;
 }
+
+/* Styling for the Netlify form */
+.netlify-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .netlify-form .form-control {
+    width: 100%;
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .netlify-form textarea.form-control {
+    resize: vertical; /* Allows vertical resizing */
+  }
+  
+  .netlify-form .btn-dark {
+    background-color: #343a40;
+    border: none;
+    color: #fff;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    cursor: pointer;
+  }
+  
+  .netlify-form .btn-dark:hover {
+    background-color: #23272b;
+  }
+  
