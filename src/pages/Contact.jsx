@@ -37,7 +37,6 @@ const Contact = () => {
             data-netlify="true"
             name="contact"
             method="POST"
-            style={{ display: "none" }}
           >
             <input type="hidden" name="form-name" value="contact" />
             <input type="text" name="name" placeholder="Name" />
