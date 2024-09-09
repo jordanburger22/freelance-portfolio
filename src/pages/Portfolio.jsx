@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import githubImg from '../assets/github-mark-white.png';
 import blackPine from '../assets/black-pine.png';
+import junkedOut from '../assets/junked-out.png';
 
 const Portfolio = () => {
     const [hoveredProject, setHoveredProject] = useState(null);
@@ -16,12 +17,12 @@ const Portfolio = () => {
             languagesAndLibraries: ['React', 'Node.js', 'Express', 'MongoDB', 'HTML', 'CSS', 'Bcrypt', 'Dotenv', 'Express-JWT', "Json Web Token"]
         },
         {
-            githubUrl: 'https://github.com/jordanburger22/assignments',
-            webpageUrl: 'https://github.com/jordanburger22/assignments',
-            screenshot: 'https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            appName: 'Project 2',
-            appDescription: 'An e-commerce platform for selling digital products.',
-            languagesAndLibraries: ['React', 'Node.js', 'Express', 'MongoDB', 'HTML', 'CSS']
+            githubUrl: 'https://github.com/jordanburger22/junked-out',
+            webpageUrl: 'https://junked-out.netlify.app/',
+            screenshot: junkedOut,
+            appName: 'Junked Out',
+            appDescription: "I developed the Junked Out LLC app, a custom web application designed to streamline the process of booking junk removal and small structure demolition services for residential and commercial clients. This project showcases my ability to build functional, user-centric applications with a focus on both front-end development. Form submissions are handled with Netlify's built in form handling.",
+            languagesAndLibraries: ['React', 'Node.js', 'React Bootstrap', 'HTML', 'CSS']
         },
         {
             githubUrl: 'https://github.com/jordanburger22/assignments',
