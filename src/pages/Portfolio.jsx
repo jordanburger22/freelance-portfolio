@@ -83,10 +83,13 @@ const Portfolio = () => {
                             <Card.Title className='card-txt'>{proj.appName}</Card.Title>
                             <Card.Text className='card-txt'>{proj.appDescription}</Card.Text>
                             {proj.guestCreds && (
+                                <>
                                 <div className="guest-creds">
                                     <Card.Text>Guest Username: {proj.guestCreds.username}</Card.Text>
                                     <Card.Text>Guest Password: {proj.guestCreds.password}</Card.Text>
                                 </div>
+                                <br></br>
+                                </>
                             )}
                             <Button
                                 className="github-btn"
