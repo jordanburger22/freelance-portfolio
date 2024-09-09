@@ -222,6 +222,7 @@
 
     .banner-img {
         border-radius: 10px;
+        margin-bottom: 15px;
         /* Slightly smaller border radius on mobile */
     }
 
@@ -289,6 +290,7 @@
     }
 
     .github-logo {
+        height: auto;
         width: 1rem; /* Smaller logo size */
     }
 
