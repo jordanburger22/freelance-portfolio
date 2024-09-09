@@ -7,15 +7,15 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section>
+    <section className="hero-section">
       <Container>
-        <Row className="align-items-center">
-          <Col md={6}>
-            <h1 className="fs-2 fs-md-1">Full Stack Developer & Problem Solver</h1>
-            <p className="fs-4 fs-md-3">
+        <Row className="align-items-center text-center text-md-start">
+          <Col md={6} className="mb-4 mb-md-0">
+            <h1 className="fs-2">Full Stack Developer & Problem Solver</h1>
+            <p className="fs-4">
               Bringing innovative solutions to web development challenges
             </p>
-            <p className="fs-5 fs-md-4">
+            <p className="fs-5">
               I’m a full stack web developer with a passion for backend
               development, experienced in building impactful technology and
               mentoring new developers. Let’s create something amazing together.

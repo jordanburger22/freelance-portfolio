@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import githubImg from '../assets/github-mark-white.png';
 import blackPine from '../assets/black-pine.png';
 import junkedOut from '../assets/junked-out.png';
@@ -16,7 +16,7 @@ const Portfolio = () => {
             screenshot: blackPine,
             appName: 'Black Pine Wellness',
             appDescription: 'I developed a website for a local massage and wellness company featuring detailed service listings with prices. The site includes a secure admin login for updating prices, modifying service descriptions, and adding new services. This project demonstrates my ability to create user-friendly websites with robust admin functionalities.',
-            languagesAndLibraries: ['React', 'Node.js', 'Express', 'MongoDB', 'CSS', 'Bcrypt', 'Dotenv', 'Express-JWT', "Json Web Token"]
+            languagesAndLibraries: ['React', 'Node.js', 'Express', 'MongoDB', 'CSS', 'Bcrypt', 'Dotenv', 'Express-JWT', 'Json Web Token']
         },
         {
             githubUrl: 'https://github.com/jordanburger22/junked-out',
@@ -40,7 +40,7 @@ const Portfolio = () => {
             screenshot: gitfit,
             appName: 'GitFit',
             appDescription: "The Workout Tracking App is a dynamic fitness management tool I developed to help users effectively log and track their workouts. Built with React for the frontend and Express with Mongoose for the backend, the app features a robust exercise database of 46 common exercises categorized by muscle group, allowing users to filter and plan their workouts efficiently. With secure user authentication implemented using express-jwt and bcrypt, users can safely register, log in, and manage their workout data. This project highlights my proficiency in creating full-stack applications, integrating user authentication, and managing data with a modern tech stack.",
-            languagesAndLibraries: ['React', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'CSS', 'Bcrypt', 'Dotenv', 'Express-JWT', "Json Web Token", "React-Router-Dom"],
+            languagesAndLibraries: ['React', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'CSS', 'Bcrypt', 'Dotenv', 'Express-JWT', 'Json Web Token', 'React-Router-Dom'],
             guestCreds: {
                 username: 'johndoe22',
                 password: 'randompassword'
@@ -61,7 +61,7 @@ const Portfolio = () => {
             <h1 className="portfolio-header">Crafting Solutions, One Project at a Time</h1>
             {portfolioProjects.map((proj, i) => (
                 <Card
-                    className="project-card mb-4 mt-4"
+                    className="project-card"
                     key={i}
                     onMouseEnter={() => handleProjectHover(i)}
                     onMouseLeave={handleProjectLeave}
@@ -82,11 +82,11 @@ const Portfolio = () => {
                             <Card.Text className='card-txt'>{proj.appDescription}</Card.Text>
                             {proj.guestCreds && (
                                 <>
-                                <div className="guest-creds">
-                                    <Card.Text>Guest Username: {proj.guestCreds.username}</Card.Text>
-                                    <Card.Text>Guest Password: {proj.guestCreds.password}</Card.Text>
-                                </div>
-                                <br></br>
+                                    <div className="guest-creds">
+                                        <Card.Text>Guest Username: {proj.guestCreds.username}</Card.Text>
+                                        <Card.Text>Guest Password: {proj.guestCreds.password}</Card.Text>
+                                    </div>
+                                    <br />
                                 </>
                             )}
                             <Button

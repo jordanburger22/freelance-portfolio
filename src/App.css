@@ -67,9 +67,12 @@
 .project-card {
     position: relative;
     overflow: hidden;
-    border: 1px solid #ddd; /* Optional: for a more defined card border */
-    border-radius: 8px; /* Optional: rounded corners for the card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow for a professional look */
+    border: 1px solid #ddd;
+    /* Optional: for a more defined card border */
+    border-radius: 8px;
+    /* Optional: rounded corners for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Optional: subtle shadow for a professional look */
 }
 
 .img-container {
@@ -78,17 +81,22 @@
 }
 
 .proj-img {
-    width: 100%; /* Make sure the image covers the width of the container */
-    height: 100%; /* Make sure the image covers the height of the container */
-    object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+    width: 100%;
+    /* Make sure the image covers the width of the container */
+    height: 100%;
+    /* Make sure the image covers the height of the container */
+    object-fit: cover;
+    /* Ensure the image covers the container while maintaining aspect ratio */
     transition: opacity 0.3s ease;
 }
 
 .overlay {
     position: absolute;
-    bottom: 10px; /* Position at the bottom of the container */
+    bottom: 10px;
+    /* Position at the bottom of the container */
     left: 50%;
-    transform: translateX(-50%); /* Center the button horizontally */
+    transform: translateX(-50%);
+    /* Center the button horizontally */
     background: rgba(0, 0, 0, 0.6);
     padding: 10px 20px;
     border-radius: 4px;
@@ -97,7 +105,8 @@
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    width: 100%; /* Ensure the overlay covers the entire container */
+    width: 100%;
+    /* Ensure the overlay covers the entire container */
     height: 100%;
 }
 
@@ -107,11 +116,13 @@
 
 .btn-live {
     color: white;
-    background-color: #343a40; /* Bootstrap dark variant */
+    background-color: #343a40;
+    /* Bootstrap dark variant */
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
-    text-decoration: none; /* Remove underline */
+    text-decoration: none;
+    /* Remove underline */
     text-align: center;
 }
 
@@ -119,28 +130,37 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #343a40; /* Bootstrap dark variant */
+    background-color: #343a40;
+    /* Bootstrap dark variant */
     color: white;
-    border: none; /* No border */
+    border: none;
+    /* No border */
     border-radius: 4px;
     padding: 5px 10px;
 }
 
 .github-logo {
-    height: 24px; /* Adjust size as needed */
+    height: 24px;
+    /* Adjust size as needed */
     margin-right: 5px;
 }
 
 .project-container {
-    margin-bottom: 20px; /* Space between cards */
+    margin-bottom: 20px;
+    /* Space between cards */
 }
 
-.banner-img{
+.banner-img {
     border-radius: 50%;
+    /* Rounded corners for the banner image */
     filter: drop-shadow(7px 6px 4px #000000);
+    width: 100%;
+    /* Make the image responsive */
+    height: auto;
+    /* Maintain aspect ratio */
 }
 
-.portfolio{
+.portfolio {
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -149,11 +169,11 @@
     border-radius: 15px;
 }
 
-.values{
+.values {
     margin: 5vh;
 }
 
-.linkedin-contact{
+.linkedin-contact {
     width: 2vw;
 }
 
@@ -161,30 +181,118 @@
 .netlify-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .netlify-form .form-control {
+}
+
+.netlify-form .form-control {
     width: 100%;
     padding: .375rem .75rem;
     border: 1px solid #ced4da;
     border-radius: .25rem;
     margin-bottom: 1rem;
-  }
-  
-  .netlify-form textarea.form-control {
-    resize: vertical; /* Allows vertical resizing */
-  }
-  
-  .netlify-form .btn-dark {
+}
+
+.netlify-form textarea.form-control {
+    resize: vertical;
+    /* Allows vertical resizing */
+}
+
+.netlify-form .btn-dark {
     background-color: #343a40;
     border: none;
     color: #fff;
     padding: .375rem .75rem;
     border-radius: .25rem;
     cursor: pointer;
-  }
-  
-  .netlify-form .btn-dark:hover {
+}
+
+.netlify-form .btn-dark:hover {
     background-color: #23272b;
-  }
-  
+}
+
+.hero-section {
+    padding: 2rem 1rem;
+    /* Add padding for mobile */
+}
+
+@media (max-width: 767px) {
+    .hero-section {
+        padding: 0rem;
+        /* Adjust padding for mobile */
+    }
+
+    .banner-img {
+        border-radius: 10px;
+        /* Slightly smaller border radius on mobile */
+    }
+
+    h1.fs-2 {
+        font-size: 1rem;
+        /* Smaller font size on mobile */
+        text-align: left;
+    }
+
+    p.fs-4 {
+        font-size: 1.25rem;
+        /* Slightly smaller font size on mobile */
+        text-align: left;
+    }
+
+    p.fs-5 {
+        font-size: 0.875rem;
+        /* Smaller font size on mobile */
+        text-align: left;
+    }
+
+    .container {
+        max-width: 100%;
+        /* Ensure container takes full width on mobile */
+        padding: 0 15px;
+        /* Adjust padding for mobile */
+    }
+    .my-5 {
+        margin-top: 1rem; /* Reduce vertical margins on mobile */
+        margin-bottom: 1rem;
+    }
+    .card-container {
+        margin-top: 1rem; /* Reduce margin on mobile */
+    }
+
+    .card-item {
+        margin-bottom: 1rem; /* Space between cards on mobile */
+    }
+
+    .portfolio{
+        width: 100vw;
+    }
+
+    .app{
+        max-width: 100vw;
+        padding: 0;
+        margin: 0;
+    }
+    .portfolio-header {
+        font-size: 1.25rem; /* Smaller font size for very small screens */
+    }
+
+    .card-txt {
+        font-size: 0.75rem; /* Smaller font size for very small screens */
+    }
+
+    .btn-live {
+        font-size: 0.75rem; /* Smaller button text */
+        padding: 0.4rem 0.8rem; /* Smaller button padding */
+    }
+
+    .github-btn {
+        font-size: 0.75rem; /* Smaller button text */
+        padding: 0.4rem 0.8rem; /* Smaller button padding */
+    }
+
+    .github-logo {
+        width: 1rem; /* Smaller logo size */
+    }
+
+    .navbar{
+        margin-bottom: 15px;
+    }
+}

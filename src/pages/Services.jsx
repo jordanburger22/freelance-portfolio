@@ -12,8 +12,7 @@ import {
 } from '../content/serviceContent.jsx'; // Adjust the import path as necessary
 
 const Services = () => {
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -21,7 +20,7 @@ const Services = () => {
       <section className="my-5 text-center">
         <h2 className="fs-2 fs-md-1">What I Can Offer</h2>
         <p className="fs-5 fs-md-4">
-          I specialize in building scalable, efficient web applications and delivering high-quality code. 
+          I specialize in building scalable, efficient web applications and delivering high-quality code.
           Let's work together to bring your vision to life.
         </p>
       </section>
@@ -34,10 +33,10 @@ const Services = () => {
             <Card>
               <Card.Body>
                 <Card.Title className="fs-5 fs-md-4">Full Stack Web Development</Card.Title>
-                <ServiceModal 
-                  title="Full Stack Web Development" 
+                <ServiceModal
+                  title="Full Stack Web Development"
                   content={developmentContent}
-                  buttonText="Learn More" 
+                  buttonText="Learn More"
                 />
               </Card.Body>
             </Card>
@@ -46,10 +45,10 @@ const Services = () => {
             <Card>
               <Card.Body>
                 <Card.Title className="fs-5 fs-md-4">Backend Development</Card.Title>
-                <ServiceModal 
-                  title="Backend Development" 
+                <ServiceModal
+                  title="Backend Development"
                   content={backendContent}
-                  buttonText="Learn More" 
+                  buttonText="Learn More"
                 />
               </Card.Body>
             </Card>
@@ -58,10 +57,10 @@ const Services = () => {
             <Card>
               <Card.Body>
                 <Card.Title className="fs-5 fs-md-4">Frontend Development</Card.Title>
-                <ServiceModal 
-                  title="Frontend Development" 
+                <ServiceModal
+                  title="Frontend Development"
                   content={frontendContent}
-                  buttonText="Learn More" 
+                  buttonText="Learn More"
                 />
               </Card.Body>
             </Card>
@@ -77,10 +76,10 @@ const Services = () => {
             <Card>
               <Card.Body>
                 <Card.Title className="fs-5 fs-md-4">Mentorship</Card.Title>
-                <ServiceModal 
-                  title="Mentorship" 
+                <ServiceModal
+                  title="Mentorship"
                   content={mentorshipContent}
-                  buttonText="Learn More" 
+                  buttonText="Learn More"
                 />
               </Card.Body>
             </Card>
@@ -89,10 +88,10 @@ const Services = () => {
             <Card>
               <Card.Body>
                 <Card.Title className="fs-5 fs-md-4">Workshops</Card.Title>
-                <ServiceModal 
-                  title="Workshops" 
+                <ServiceModal
+                  title="Workshops"
                   content={workshopsContent}
-                  buttonText="Learn More" 
+                  buttonText="Learn More"
                 />
               </Card.Body>
             </Card>
