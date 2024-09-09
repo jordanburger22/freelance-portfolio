@@ -47,8 +47,6 @@ const Portfolio = () => {
             }
         }
     ];
-    // johndoe22
-    // randompassword
 
     const handleProjectHover = (index) => {
         setHoveredProject(index);
