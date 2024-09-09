@@ -27,7 +27,7 @@ const Portfolio = () => {
         },
         {
             githubUrl: 'https://github.com/jordanburger22/league-data',
-            webpageUrl: 'https://github.com/jordanburger22/assignments',
+            webpageUrl: 'https://league-search-feature.netlify.app/',
             screenshot: leagueSearch,
             appName: 'League Champions Search Feature Project',
             appDescription: 'In the League Champions Search Feature Project, I created a foundational web application displaying League of Legends champions, designed to be enhanced by students as part of their learning experience. The project includes a base implementation where students can add a search feature with autocomplete functionality, improving the user interface and experience. The task involves integrating a search bar within the ChampionList component, styling it to fit the existing design, and ensuring that the autocomplete feature activates after three characters. This project serves as a practical exercise for students to practice working with dynamic features, object conversion, and CSS styling, while also providing hands-on experience with filtering data and navigating existing codebases.',
