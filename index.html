@@ -1,28 +1,35 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="/src/assets/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jordan Burger Development</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-</head>
-
-<body>
-  <div id="root"></div>
-  <form data-netlify="true" name="contact" hidden>
-    <input type="hidden" name="form-name" value="contact" />
-    <input type="text" name="name" placeholder="Name" />
-    <input type="email" name="email" placeholder="Email" />
-    <input type="text" name="subject" placeholder="Subject" />
-    <textarea name="message" placeholder="Message"></textarea>
-  </form>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jordan Burger | Full Stack Engineer</title>
+    <meta name="description" content="Full Stack Engineer & System Architect. Building production systems at unusual velocity." />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Jordan Burger | Full Stack Engineer" />
+    <meta property="og:description" content="Full Stack Engineer & System Architect. I build systems that solve problems others can't — or won't." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jordan-burger.netlify.app/" />
+    <meta property="og:image" content="https://jordan-burger.netlify.app/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jordan Burger | Full Stack Engineer" />
+    <meta name="twitter:description" content="Full Stack Engineer & System Architect. I build systems that solve problems others can't — or won't." />
+    <meta name="twitter:image" content="https://jordan-burger.netlify.app/og-image.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Hidden form for Netlify to detect at build time -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
 </html>
