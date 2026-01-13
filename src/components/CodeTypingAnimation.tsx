@@ -64,16 +64,18 @@ export class ProductService {
   },
   {
     language: 'TypeScript',
-    fileName: 'types/build.ts',
+    fileName: 'types/api.ts',
     color: '#3178c6',
-    code: `interface BuildPart {
-  id: string;
-  category: PartCategory;
-  platform: 'AR-15' | 'AR-10' | 'AR-9';
-  specs: {
-    boltFace?: BoltFace;
-    gasSystem?: GasLength;
-    caliber: string;
+    code: `interface ApiResponse<T> {
+  data: T;
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+  };
+  error?: {
+    code: string;
+    message: string;
   };
 }`,
   },
