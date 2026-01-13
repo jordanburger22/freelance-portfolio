@@ -29,17 +29,20 @@ const snippets: CodeSnippet[] = [
   },
   {
     language: 'NestJS',
-    fileName: 'compat.service.ts',
+    fileName: 'product.service.ts',
     color: '#e0234e',
     code: `@Injectable()
-export class CompatService {
-  checkCompatibility(parts: Part[]) {
-    const facts = this.buildFacts(parts);
-    const rules = this.getRulePairs(facts);
-    
-    return rules.reduce((score, rule) => 
-      score + rule.evaluate(facts), 100
-    );
+export class ProductService {
+  constructor(
+    @InjectModel(Product.name)
+    private productModel: Model<Product>,
+  ) {}
+
+  async findByCategory(category: string) {
+    return this.productModel
+      .find({ category, status: 'active' })
+      .populate('vendor')
+      .exec();
   }
 }`,
   },
@@ -297,7 +300,7 @@ const CodeTypingAnimation = () => {
             setIsTyping(true);
           }, 3000);
         }
-      }, 60);
+      }, 80);
 
       return () => clearInterval(typeInterval);
     }
