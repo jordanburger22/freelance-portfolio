@@ -40,8 +40,8 @@ export const projectDetails: Record<string, ProjectDetail> = {
         timeline: 'Sep 2024 - Present',
         tagline: 'Production-grade firearms e-commerce platform with 31 interconnected systems',
         overview: `Built a complete e-commerce platform for AR-15/AR-10/AR-9 parts from the ground up. 
-    Not just CRUD operations — this includes a 2,700-line compatibility engine encoding mechanical 
-    engineering constraints, enterprise-grade authentication, 5-tier content moderation, real-time 
+    Not just CRUD operations — this includes a sophisticated compatibility engine encoding mechanical 
+    engineering constraints, enterprise-grade authentication, content moderation, real-time 
     price tracking, and a full social platform with community builds and forums.
     
     At MVP launch (Jan 2026), I owned 78.5% of the entire production codebase — 153,075 lines across 
@@ -64,37 +64,22 @@ export const projectDetails: Record<string, ProjectDetail> = {
                 title: 'AR Compatibility Engine',
                 problem: `AR-15/AR-10/AR-9 platforms have complex mechanical interdependencies. A wrong bolt face 
         with a barrel means the gun won't cycle. Wrong buffer weight means reliability issues. Customers 
-        were buying incompatible parts, leading to $700+ returns and frustrated users.`,
-                solution: `Built a 2,700-line rules engine that encodes mechanical engineering constraints into 
-        executable validation logic. The system evaluates 43 part types across 3 platforms, checking 
-        bolt face compatibility, gas system matching, buffer requirements, and threading patterns.`,
+        were buying incompatible parts, leading to expensive returns and frustrated users.`,
+                solution: `Built a rules engine that encodes mechanical engineering constraints into 
+        executable validation logic. The system evaluates parts across multiple platforms, checking 
+        compatibility factors like bolt face, gas systems, buffers, and threading patterns.`,
                 technicalDetails: [
-                    'Factory pattern for building compatibility "facts" from messy vendor data',
-                    'Strategy pattern for different rule sets per part-pair combination',
-                    'Weighted scoring system: 50 points for critical failures, 15 for warnings',
-                    '30+ specific compatibility rule pairs covering all major failure modes',
-                    'User-friendly message generation: technical constraints → educational explanations',
+                    'Custom rules engine architecture for complex part interdependencies',
+                    'Weighted scoring system for different severity levels',
+                    'User-friendly message generation explaining compatibility issues',
+                    'Handles edge cases and data normalization from multiple vendors',
                 ],
                 businessImpact: [
-                    'Prevents $700+ in returns per incompatible purchase',
-                    'Core intellectual property — 6-12 months for competitor to replicate',
-                    'Builds customer trust: "this site actually knows guns"',
-                    'No firearms retailer has anything comparable',
+                    'Prevents expensive returns from incompatible purchases',
+                    'Core intellectual property — significant time investment to replicate',
+                    'Builds customer trust through accurate recommendations',
+                    'No firearms retailer has comparable functionality',
                 ],
-                codeExample: {
-                    language: 'typescript',
-                    code: `// Bolt face validation example
-IF bolt_face = "5.56" AND barrel_caliber = "308"
-  THEN incompatible (50 point penalty)
-  MESSAGE: "This bolt is designed for 5.56 rounds 
-            and cannot chamber .308 ammunition"
-
-IF gas_system_length = "CARBINE" AND barrel_length < 14.5
-  THEN warning (15 point penalty)
-  MESSAGE: "Carbine gas systems typically perform 
-            better with barrels 14.5\\" or longer"`,
-                    caption: 'Simplified rule logic — actual implementation handles edge cases and normalization',
-                },
             },
             {
                 title: 'Pistol Compatibility Framework',
@@ -106,14 +91,13 @@ IF gas_system_length = "CARBINE" AND barrel_length < 14.5
                 technicalDetails: [
                     'Universal schema with optional platform-specific fields',
                     'Simple set intersection queries vs complex rule evaluation',
-                    'AR system: 43 part types, 2,700 lines, 3 platforms',
-                    'Pistol system: 16 categories, ~200 lines, 14+ platforms',
-                    'Adding new platform = add enum + optional fields (no code changes)',
+                    'Extensible architecture — adding new platforms requires no code changes',
+                    'Right tool for the job: different problems, different solutions',
                 ],
                 businessImpact: [
                     'Scaled to 14+ pistol platforms with minimal code',
                     'Demonstrated pattern recognition and architectural maturity',
-                    'Right tool for the job: different problems, different solutions',
+                    'Faster time-to-market for new platform support',
                 ],
             },
             {
@@ -124,79 +108,54 @@ IF gas_system_length = "CARBINE" AND barrel_length < 14.5
         Posts start with base points, gain heat from replies and likes, and decay over time. Discovered 
         later this is nearly identical to Reddit's approach — arrived at the same solution without knowing theirs.`,
                 technicalDetails: [
-                    'Base points: 100 (120 for trusted users, 132 if has embedded build)',
-                    'Reply heat: +15 base, +20 diversity bonus for first reply from user',
-                    'Like heat: +10 for post likes, +5 for reply likes',
-                    'Time decay: 5% per day base, 10% if inactive 3+ days',
-                    '24-hour grace period before decay begins',
-                    'Minimum floor of 10 points (never fully disappears)',
+                    'Activity-based scoring with engagement multipliers',
+                    'Time decay with grace periods for new content',
+                    'User trust levels influence initial scoring',
+                    'Self-maintaining system requiring no manual curation',
                 ],
                 businessImpact: [
-                    'Keeps active discussions visible without manual curation',
+                    'Keeps active discussions visible automatically',
                     'Rewards quality content and diverse engagement',
-                    'Self-maintaining: no admin intervention needed',
+                    'Zero admin intervention needed for ranking',
                 ],
-                codeExample: {
-                    language: 'typescript',
-                    code: `export const HEAT_CONSTANTS = {
-  INITIAL_POST: 100,
-  REPLY: 15,
-  REPLY_DIVERSITY_BONUS: 20,
-  LIKE_ON_POST: 10,
-  LIKE_ON_REPLY: 5,
-  TRUSTED_USER_MULTIPLIER: 1.2,
-  HAS_EMBEDDED_BUILD_MULTIPLIER: 1.1,
-  BASE_DECAY_PERCENT: 0.05,
-  ACCELERATED_DECAY_PERCENT: 0.10,
-  INACTIVE_THRESHOLD_DAYS: 3,
-  MINIMUM_HEAT_SCORE: 10,
-  DECAY_GRACE_PERIOD_HOURS: 24,
-};`,
-                    caption: 'Heat constants — daily cron job applies decay to all posts',
-                },
             },
             {
                 title: 'Enterprise Authentication System',
                 problem: `Needed production-grade auth for an e-commerce platform: MFA, account security, 
         admin roles — without paying for Auth0 ($50-100K/year at scale).`,
                 solution: `Built complete enterprise auth from scratch: TOTP/authenticator app support with 
-        AES-256-GCM encrypted secret storage, progressive lockout, trusted devices, timing-attack 
-        mitigation, and 5-tier RBAC.`,
+        encrypted secret storage, progressive lockout, trusted devices, timing-attack 
+        mitigation, and role-based access control.`,
                 technicalDetails: [
-                    'TOTP with speakeasy: 30-second windows, ±30s drift tolerance',
-                    'AES-256-GCM encryption for TOTP secrets at rest',
-                    '10 backup codes per user, SHA-256 hashed, one-time use',
-                    'Progressive lockout: 15min → 1hr → 24hr → permanent',
-                    'Trusted devices: 14-day expiry, SHA-256 hashed tokens, max 5 per user',
+                    'TOTP with encrypted secrets at rest',
+                    'Backup codes with secure hashing',
+                    'Progressive lockout with increasing penalties',
+                    'Trusted device management with secure token handling',
                     'Timing-safe comparisons to prevent enumeration attacks',
-                    'CAPTCHA (Cloudflare Turnstile) after 2 failed attempts',
                 ],
                 businessImpact: [
-                    'Auth0-equivalent functionality at zero licensing cost',
+                    'Enterprise-grade security at zero licensing cost',
                     'Required for privileged roles (admin, editor, owner)',
                     'Audit logging for compliance and security incidents',
-                    'Enterprise customers get enterprise security',
                 ],
             },
             {
-                title: '5-Tier Content Moderation',
+                title: 'Content Moderation System',
                 problem: `User-generated content (community builds, forum posts, comments) needs moderation 
         at scale. Can't manually review everything, but can't let harmful content through.`,
-                solution: `Built defense-in-depth moderation comparable to Reddit/Twitter: user trust system, 
-        image hash deduplication, text filtering with l33tspeak detection, AI image safety checking, 
-        and human review queue with Microsoft Teams integration.`,
+                solution: `Built defense-in-depth moderation with multiple tiers: user trust system, 
+        image deduplication, text filtering, AI safety checking, and human review queue 
+        with team notifications.`,
                 technicalDetails: [
-                    'Tier 1: User trust levels (normal → trusted → restricted → banned)',
-                    'Tier 2: MD5 image hashing — blocked images can\'t be re-uploaded',
-                    'Tier 3: Text moderation with regex + database blocked words',
-                    'Tier 4: Sightengine AI for nudity, gore, violence detection',
-                    'Tier 5: Human review queue with Teams notifications',
-                    'Progressive discipline: warning → 7-day → 30-day → permanent',
-                    'Trusted users (10+ approved, 0 violations) bypass moderation',
+                    'User trust levels with progressive privileges',
+                    'Image hashing to prevent re-upload of blocked content',
+                    'Text moderation with pattern detection',
+                    'AI integration for image safety checking',
+                    'Human review queue with notification integration',
                 ],
                 businessImpact: [
                     'Scales without large moderation team',
-                    '$480-630K/year saved vs manual moderation',
+                    'Significant cost savings vs manual moderation',
                     'Protects brand from harmful content',
                     'Rewards good community members with trust',
                 ],
@@ -205,40 +164,37 @@ IF gas_system_length = "CARBINE" AND barrel_length < 14.5
                 title: 'Price Tracking & Alerts',
                 problem: `Firearms parts prices fluctuate across vendors. Customers want to know when 
         to buy, but no firearms retailer offers price tracking.`,
-                solution: `Built Amazon-level price tracking: 90-day history, all-time low/high tracking, 
-        user-set price alerts, and back-in-stock notifications. Nightly cron jobs scrape vendor 
-        prices and trigger email/WebSocket notifications.`,
+                solution: `Built comprehensive price tracking: historical data, all-time low/high tracking, 
+        user-set price alerts, and back-in-stock notifications. Automated jobs track prices 
+        and trigger notifications across multiple channels.`,
                 technicalDetails: [
-                    'Daily price aggregation across all vendors per part',
-                    '90-day rolling history for price charts',
-                    'All-time low/high with vendor attribution',
-                    'User alerts: target price + optional vendor filter',
-                    '24-hour notification cooldown (prevent spam)',
-                    'Stock alerts: out-of-stock → in-stock detection',
-                    'Multi-channel: email + WebSocket real-time',
+                    'Daily price aggregation across vendors',
+                    'Rolling history for price trend visualization',
+                    'User alerts with customizable thresholds',
+                    'Stock monitoring with availability detection',
+                    'Multi-channel notifications (email + real-time)',
                 ],
                 businessImpact: [
-                    'Unique in firearms industry — no competitor has this',
+                    'Unique feature in firearms industry',
                     'Drives purchases through timely alerts',
-                    '2.5-3.5x conversion improvement from accurate availability',
-                    'CamelCamelCamel for guns',
+                    'Improved conversion from accurate availability data',
                 ],
             },
         ],
         techStack: [
             { category: 'Backend', items: ['TypeScript', 'NestJS', 'Node.js', 'Express'] },
             { category: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-            { category: 'Database', items: ['MongoDB', 'Mongoose', '50+ compound indexes'] },
+            { category: 'Database', items: ['MongoDB', 'Mongoose', 'Optimized Indexing'] },
             { category: 'Infrastructure', items: ['AWS', 'Docker', 'Cloudflare', 'Render'] },
-            { category: 'Security', items: ['JWT', 'TOTP', 'AES-256-GCM', 'RBAC', 'Turnstile'] },
-            { category: 'Monitoring', items: ['Datadog APM', 'Custom proxy for Render'] },
+            { category: 'Security', items: ['JWT', 'TOTP', 'Encryption', 'RBAC'] },
+            { category: 'Monitoring', items: ['Datadog APM', 'Custom Integrations'] },
         ],
         outcomes: [
-            'MVP launched January 2026 with 100% of commits in final 10 days from me',
-            'Platform handles 500+ products with real-time compatibility checking',
+            'MVP launched January 2026 with complete feature set',
+            'Platform handles hundreds of products with real-time compatibility checking',
             'Enterprise-grade security without enterprise licensing costs',
             'Social features drive engagement and user-generated content',
-            'Price tracking creates competitive moat no competitor can quickly replicate',
+            'Price tracking creates competitive moat',
         ],
         color: '#2c5530',
     },
