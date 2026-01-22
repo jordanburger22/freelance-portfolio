@@ -450,41 +450,43 @@ const greet = (name) => \`Hello \${name}\`;
         title: 'EngineerSmith',
         role: 'Lead Developer',
         timeline: 'Jan 2025 - Present',
-        tagline: 'Multi-tenant certification platform with multi-runtime code execution and semantic auto-grading',
-        overview: `Built a standalone certification/assessment platform for coding skills, designed to be marketed 
-    independently while supporting Simply Coding's testing needs. The platform features multi-runtime code 
-    execution across 4 languages, 5 question types with semantic auto-grading, and complete multi-tenant 
-    organization management.
+        tagline: 'Certification platform filling the gap between weak multiple-choice tests and expensive enterprise hiring tools',
+        overview: `Built a standalone certification platform for coding skills that actually validates ability — not memorization. 
+    Unlike W3Schools (multiple choice quizzes) or HackerRank (enterprise pricing), EngineerSmith combines real code execution 
+    against test cases with meaningful certifications accessible to individuals and organizations.
+
+    The platform features multi-runtime code execution across 4 languages, 5 question types with semantic auto-grading, 
+    and complete multi-tenant organization management. In January 2026, migrated the entire backend from Express to NestJS 
+    in 36 hours while simultaneously redesigning the UI and implementing load testing infrastructure.
     
-    The core innovation is the execution engine: students write code in the browser, it's sent to sandboxed 
-    workers that execute against test cases, and results include captured console output for debugging. 
-    The system handles everything from simple multiple choice to complex code challenges with hidden test cases.`,
+    Business model: B2B organizations (correctional facilities, schools, bootcamps) create custom assessments and manage users. 
+    B2C individuals use EngineerSmith's standardized certification exams to prove real coding ability.`,
         challenges: [
             'Execute untrusted code safely across multiple language runtimes',
-            'Capture console output without mixing it with test harness output',
-            'Support diverse question types with consistent grading interface',
+            'Fill market gap: no platform combines docs + real code execution + meaningful certs',
             'Multi-tenant isolation with shared global question pools',
-            'Semantic validation that accepts multiple correct solutions',
+            'Semantic validation that accepts multiple correct solutions (arrow functions, declarations, etc.)',
+            'Production stability on limited resources (2GB RAM / 1 CPU)',
         ],
         highlights: [
-            { label: 'Language Runtimes', value: '4' },
+            { label: 'Concurrent Users', value: '50+' },
+            { label: 'Avg Response', value: '240ms' },
+            { label: 'NestJS Migration', value: '36 hrs' },
             { label: 'Question Types', value: '5' },
-            { label: 'Architecture', value: 'Multi-Tenant' },
-            { label: 'Grading', value: 'Semantic' },
         ],
         features: [
             {
                 title: 'Multi-Runtime Code Execution Engine',
-                problem: `Need to execute student code in JavaScript, TypeScript, Python, SQL, and Dart — all 
-        safely sandboxed with timeout protection, while capturing console output for debugging feedback.`,
+                problem: `Existing certification platforms use multiple choice (W3Schools) or are priced for enterprise hiring 
+        (HackerRank at $50-100K/year). Nobody offers real code execution with test case validation at accessible pricing 
+        for education and individual learners.`,
                 solution: `Built separate runners for each runtime: Node.js with child_process spawning, Python via 
-        Pyodide (WebAssembly), SQL via sql.js, and Dart. Each runner intercepts console output, executes 
-        test cases, and returns structured results with per-test console logs.`,
+        Pyodide (WebAssembly), SQL via sql.js. Each runner intercepts console output, executes test cases with memory 
+        limits and timeouts, and returns structured results with per-test console logs for debugging.`,
                 technicalDetails: [
-                    'Node runner: Child process with temp files, timeout via SIGTERM/SIGKILL',
-                    'Python runner: Pyodide in worker thread, sys.stdout/stderr override',
+                    'Node runner: Child process with --max-old-space-size=128, timeout via SIGTERM/SIGKILL',
+                    'Python runner: Pyodide WebAssembly with sys.stdout/stderr override',
                     'SQL runner: sql.js with schema setup, seed data, result comparison',
-                    'Dart runner: Native dart execution with process management',
                     'Console capture: Override console.log to array, restore for result output',
                     'Deep equality comparison for complex return types (arrays, objects, NaN)',
                     'Smart function calling: handles single param vs spread args edge cases',
@@ -492,8 +494,8 @@ const greet = (name) => \`Hello \${name}\`;
                 businessImpact: [
                     'Students get real execution feedback, not string matching',
                     'Console logs help students debug failing tests',
-                    'Timeout protection prevents infinite loops from blocking system',
-                    'Same grading interface regardless of language',
+                    'Certifications prove actual coding ability, not memorization',
+                    'Accessible pricing vs enterprise hiring platforms',
                 ],
                 codeExample: {
                     language: 'javascript',
@@ -510,142 +512,159 @@ console.log = (...args) => {
   consoleLogs.push({ type: 'log', message });
 };
 
-// Execute student code...
-// Test cases run with captured output
+// Execute student code with timeout protection
+const child = spawn('node', 
+  ['--max-old-space-size=128', scriptPath],
+  { stdio: ['ignore', 'pipe', 'pipe'] }
+);
 
-// Return results with original console
-originalConsoleLog(JSON.stringify({
-  results, consoleLogs, overallPassed
-}));`,
-                    caption: 'Console interception allows capturing student debug output',
+// SIGTERM → SIGKILL escalation for hung processes
+setTimeout(() => child.kill('SIGTERM'), timeoutMs);`,
+                    caption: 'Sandboxed execution with console capture and resource limits',
                 },
             },
             {
-                title: 'Question Bank System',
-                problem: `Need to support multiple question types (code challenges, debugging, fill-in-blank, 
-        multiple choice, true/false) across 12 languages with proper validation that prevents 
-        invalid combinations.`,
-                solution: `Built a schema with language-category-type validation matrix. Each question type has 
-        specific required fields. The system prevents invalid combinations at save time and provides 
-        clear error messages.`,
+                title: 'Express → NestJS Migration (36 Hours)',
+                problem: `Legacy Express codebase had memory leaks causing production instability. Test sessions were 
+        crashing unpredictably. Needed enterprise-grade architecture without enterprise timeline.`,
+                solution: `Complete backend rewrite to NestJS with proper module isolation, dependency injection, 
+        and structured error handling. Included comprehensive load testing to validate stability before deployment. 
+        Simultaneously redesigned the entire UI from generic blue SaaS template to distinctive orange/dark brand identity.`,
                 technicalDetails: [
-                    '5 question types: codeChallenge, codeDebugging, fillInTheBlank, multipleChoice, trueFalse',
-                    '12 languages: JS, TS, Python, SQL, Dart, React, RN, Flutter, Express, HTML, CSS, JSON',
-                    '3 categories: logic (executable), ui (visual), syntax (pattern matching)',
-                    'Validation matrix prevents invalid combos (e.g., no codeChallenge for HTML)',
-                    'Per-question usage stats: times used, success rate, average time',
-                    'Duplicate detection service prevents question bank pollution',
+                    'Full NestJS modular architecture: auth, grading, test-session, question, organization modules',
+                    'Dependency injection for testability and loose coupling',
+                    'Global exception filters with consistent error response format',
+                    'Rate limiting with tiered throttling (3/s, 20/10s, 100/min)',
+                    'JWT authentication with HTTP-only cookies and CSRF protection',
+                    'Custom load testing script simulating concurrent test-takers',
                 ],
                 businessImpact: [
-                    'Instructors can\'t create broken questions',
-                    'Clear error messages guide proper question setup',
-                    'Usage stats identify problematic questions',
-                    'Duplicate detection saves time and maintains quality',
+                    'Fixed memory leaks affecting production stability',
+                    'Load tested to 50+ concurrent users with 72% success rate',
+                    'Professional brand identity vs generic template',
+                    'Completed in 36 hours including UI redesign',
                 ],
             },
             {
-                title: 'Test Session Management',
-                problem: `Students taking tests need answer persistence, time tracking, attempt limits, and 
-        protection against refreshing or navigating away. Instructors need to grant extra attempts 
-        for legitimate retakes.`,
-                solution: `Built complete test session lifecycle with snapshots. When a student starts a test, 
-        a snapshot captures the exact questions (immutable even if test is edited). Sessions track 
-        status (active/completed/expired/abandoned), answers persist across page refreshes, and 
-        an override system allows instructors to grant extra attempts.`,
+                title: 'Load Testing Infrastructure',
+                problem: `Deploying to production (2GB RAM / 1 CPU on Render) without knowing capacity limits. 
+        Correctional facilities can't afford platform crashes during certification exams.`,
+                solution: `Built custom load testing script that creates test users, simulates concurrent logins, 
+        starts test sessions simultaneously, answers questions with realistic timing, and reports detailed 
+        performance metrics by endpoint.`,
                 technicalDetails: [
-                    'Test snapshot: immutable copy of questions when session starts',
-                    'Session states: active → completed/expired/abandoned',
-                    'Answer persistence: saves on every question change',
-                    'Time tracking: server-side enforcement, not client-side',
-                    'Attempt counting: from TestSession status, not separate counter',
-                    'StudentTestOverride: extra attempts granted by instructors',
-                    'AttemptRequest: students can request more attempts with reason',
+                    'Configurable user count with staggered or simultaneous starts',
+                    'Realistic mode (10-45s per question) vs fast mode (500ms-2s) for stress testing',
+                    'Automatic test user cleanup after runs',
+                    'Per-endpoint response time breakdown (avg, min, max)',
+                    'Success rate tracking and error categorization',
+                    'MongoDB direct connection for user creation/cleanup',
                 ],
                 businessImpact: [
-                    'No lost work if browser closes unexpectedly',
-                    'Fair time enforcement (can\'t manipulate client clock)',
-                    'Instructors have flexibility for legitimate retakes',
-                    'Audit trail for all attempts and overrides',
+                    'Identified capacity ceiling: ~35-40 concurrent users on current infrastructure',
+                    '20 users: 95% success rate, 238ms avg response',
+                    '50 users: 72% success rate, 240ms avg response (ceiling found)',
+                    'Data-driven infrastructure scaling decisions',
                 ],
+                codeExample: {
+                    language: 'bash',
+                    code: `# Realistic timing (human-like delays)
+node scripts/loadTest.js --testId=abc123 --users=20
+
+# Stress test (rapid-fire)
+node scripts/loadTest.js --testId=abc123 --users=50 --fast
+
+# Results:
+# ════════════════════════════════════════
+# 📊 LOAD TEST RESULTS
+# ════════════════════════════════════════
+#   Duration: 3m 19s
+#   Users: 50
+#   Success Rate: 72%
+#   Avg Response Time: 240ms
+#   Requests/sec: 26.15`,
+                    caption: 'Custom load testing with realistic and stress test modes',
+                },
             },
             {
                 title: 'Multi-Tenant Organization System',
-                problem: `Platform needs to support multiple organizations (schools, companies) with isolated 
-        data, while allowing EngineerSmith (super org) to manage all organizations and share global 
+                problem: `Platform needs to support multiple organizations (correctional facilities, schools, bootcamps) 
+        with isolated data, while allowing EngineerSmith to manage all organizations and share global certification 
         content across tenants.`,
-                solution: `Built hierarchical multi-tenant architecture. Super org (EngineerSmith) can create 
-        child organizations with invite codes. Questions and tests can be organization-scoped or global. 
-        Users belong to exactly one organization with role-based permissions.`,
+                solution: `Built hierarchical multi-tenant architecture. Super org (EngineerSmith) creates child 
+        organizations with invite codes. Questions and tests can be organization-scoped or global. B2B clients 
+        create custom content; B2C individuals use standardized certifications.`,
                 technicalDetails: [
                     'Organization model: name, inviteCode, isSuperOrg flag',
-                    'User → Organization: many-to-one relationship',
+                    'User → Organization: many-to-one with role-based permissions',
                     'Questions/Tests: organizationId for scoping, isGlobal for sharing',
-                    'Invite code registration: validates code, assigns to org',
+                    'Invite code registration: validates code, assigns to org automatically',
                     'Role hierarchy: student < instructor < admin < super org admin',
-                    'Cross-org queries only for super org admins',
+                    'SSO integration for partner platforms (Simply Coding)',
                 ],
                 businessImpact: [
-                    'Each client gets isolated environment',
+                    'B2B: Organizations pay for seats, create custom assessments',
+                    'B2C: Individuals use standardized certs to prove skills',
                     'Global questions reduce duplication across orgs',
                     'Invite codes enable self-service registration',
-                    'Super org maintains control and visibility',
                 ],
                 codeExample: {
-                    language: 'javascript',
-                    code: `// Student dashboard query with org + global tests
-Test.aggregate([
+                    language: 'typescript',
+                    code: `// Student sees both org-specific and global tests
+const tests = await this.testModel.aggregate([
   {
     $match: {
       status: 'active',
       $or: [
-        { organizationId: studentOrgId },
+        { organizationId: student.organizationId },
         { isGlobal: true }
       ]
     }
   },
-  // Lookup completed sessions, overrides...
-  // Calculate remaining attempts...
-])`,
-                    caption: 'Students see both org-specific and global tests',
+  // Lookup completed sessions for attempt tracking
+  // Calculate remaining attempts with instructor overrides
+]);`,
+                    caption: 'Multi-tenant query pattern with global content sharing',
                 },
             },
             {
-                title: 'Analytics & Reporting System',
-                problem: `Instructors need visibility into student performance, question difficulty, and test 
-        effectiveness. Need analytics at multiple levels: individual student, question, section, and test.`,
-                solution: `Built comprehensive analytics with aggregation pipelines. Result analytics show 
-        pass rates and score distributions. Question analytics identify problematic questions. 
-        User analytics track individual progress over time.`,
+                title: 'Test Session Management',
+                problem: `Students taking tests need answer persistence, server-side time enforcement, attempt limits, 
+        and protection against browser crashes. Can't trust client-side timing (easily manipulated).`,
+                solution: `Built complete test session lifecycle with immutable snapshots. When a student starts a test, 
+        a snapshot captures the exact questions (won't change even if test is edited). Sessions track status, 
+        answers persist across page refreshes, and instructors can grant extra attempts.`,
                 technicalDetails: [
-                    'Result analytics: filter by test, org, date range, question type',
-                    'Question analytics: success rate, average time, attempt distribution',
-                    'User analytics: progress tracking, score trends',
-                    'Section analytics: performance by test section',
-                    'Aggregation pipelines for efficient computation',
-                    'Permission validation: instructors see own org, super admins see all',
+                    'Test snapshot: immutable copy of questions when session starts',
+                    'Session states: active → completed/expired/abandoned',
+                    'Answer persistence: saves on every question change',
+                    'Server-side time tracking: can\'t manipulate client clock',
+                    'StudentTestOverride: instructors grant extra attempts',
+                    'AttemptRequest: students request retakes with reason',
                 ],
                 businessImpact: [
-                    'Identify struggling students early',
-                    'Find and fix poorly-worded questions',
-                    'Data-driven curriculum improvement',
-                    'Demonstrate certification value to employers',
+                    'No lost work if browser closes unexpectedly',
+                    'Fair time enforcement for all students',
+                    'Instructors have flexibility for legitimate retakes',
+                    'Audit trail for compliance and dispute resolution',
                 ],
             },
         ],
         techStack: [
-            { category: 'Frontend', items: ['React', 'TypeScript', 'Context API', 'Custom Hooks'] },
-            { category: 'Backend', items: ['Node.js', 'Express', 'Mongoose'] },
+            { category: 'Backend', items: ['NestJS', 'TypeScript', 'Node.js', 'Mongoose'] },
+            { category: 'Frontend', items: ['React 19', 'TypeScript', 'Tailwind CSS', 'Monaco Editor'] },
             { category: 'Database', items: ['MongoDB', 'Aggregation Pipelines'] },
-            { category: 'Execution', items: ['Worker Threads', 'Pyodide', 'sql.js', 'Child Process'] },
-            { category: 'Real-time', items: ['WebSocket', 'Socket.io'] },
-            { category: 'Auth', items: ['JWT', 'bcrypt', 'RBAC', 'SSO Support'] },
+            { category: 'Execution', items: ['Child Process', 'Pyodide', 'sql.js', 'Worker Threads'] },
+            { category: 'Infrastructure', items: ['Render', 'Cloudflare', 'MongoDB Atlas'] },
+            { category: 'Auth', items: ['JWT', 'HTTP-only Cookies', 'CSRF', 'SSO'] },
         ],
         outcomes: [
-            'Multi-runtime execution engine supporting 4 languages',
-            '5 question types with semantic auto-grading',
-            'Multi-tenant SaaS architecture ready for commercial licensing',
-            'Complete test lifecycle from composition to analytics',
-            'Built as standalone product, marketable independently',
+            'Production platform at engineersmith.com serving Simply Coding certifications',
+            'Express → NestJS migration completed in 36 hours with UI redesign',
+            'Load tested to 50+ concurrent users, identified capacity ceiling',
+            'Multi-tenant SaaS architecture ready for B2B licensing',
+            'Filling market gap: real code execution + meaningful certs + accessible pricing',
+            'No competitor combines W3Schools-style docs + CodeSignal-style challenges + rigorous certifications',
         ],
         color: '#f59e0b',
     },
