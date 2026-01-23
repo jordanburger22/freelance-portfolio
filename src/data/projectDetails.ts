@@ -11,6 +11,12 @@ export interface FeatureDeepDive {
     };
 }
 
+export interface ProjectDemo {
+    title: string;
+    description: string;
+    videoUrl: string;
+}
+
 export interface ProjectDetail {
     id: string;
     title: string;
@@ -30,13 +36,14 @@ export interface ProjectDetail {
     }[];
     outcomes: string[];
     color: string;
+    demos?: ProjectDemo[];
 }
 
 export const projectDetails: Record<string, ProjectDetail> = {
     gunkustom: {
         id: 'gunkustom',
         title: 'GunKustom',
-        role: 'Acting CTO / Senior Full Stack Engineer',
+        role: 'CTO / Senior Full Stack Engineer',
         timeline: 'Sep 2024 - Present',
         tagline: 'Production-grade firearms e-commerce platform with 31 interconnected systems',
         overview: `Built a complete e-commerce platform for AR-15/AR-10/AR-9 parts from the ground up. 
@@ -217,7 +224,7 @@ export const projectDetails: Record<string, ProjectDetail> = {
             'No terminal access for students (can\'t run npm, node commands)',
             'Browser-based bundlers (CodeSandbox, Replit) blocked',
             'Intermittent connectivity and strict firewall rules',
-            'Must work offline or with severely limited internet',
+            'Must work through restrictive firewalls while maintaining server connection',
         ],
         highlights: [
             { label: 'Active Students', value: '500+' },
@@ -304,22 +311,24 @@ const greet = (name) => \`Hello \${name}\`;
                 },
             },
             {
-                title: 'Air-Gapped Deployment Architecture',
-                problem: `Prison networks block everything. CDNs, cloud monitoring, external APIs — 
-        all blocked. The platform must work with zero external dependencies.`,
+                title: 'Restricted Network Architecture',
+                problem: `Prison networks block most external services. CDNs, cloud monitoring, external APIs — 
+        all blocked. The platform must work with minimal external dependencies while students 
+        maintain connection to our compilation server.`,
                 solution: `Self-contained architecture with curated dependency list. S3 bucket 
-        whitelisted across facilities serves as package mirror. All assets self-hosted. 
-        Database-only caching (no Redis dependency).`,
+        whitelisted across facilities serves as package mirror. All frontend assets self-hosted. 
+        Compilation happens server-side where internet access exists.`,
                 technicalDetails: [
                     'Curated ~20 library whitelist served from S3',
-                    'All CSS/JS/images self-hosted (no Google Fonts)',
-                    'PostgreSQL for all caching (Redis might not be available)',
-                    'HTTP polling for heartbeat (WebSockets might be blocked)',
-                    'Compilation server has internet, students don\'t need it',
+                    'All CSS/JS/images self-hosted (no Google Fonts, no CDNs)',
+                    'PostgreSQL for all caching (minimal external dependencies)',
+                    'HTTP polling fallback when WebSockets are blocked',
+                    'Server has full internet - handles all npm/compilation',
+                    'Students only need to reach our server, not the broader internet',
                 ],
                 businessImpact: [
                     'Works reliably in 10+ correctional facilities',
-                    'Zero external dependencies in student browser',
+                    'Minimal external dependencies in student browser',
                     '99%+ uptime despite network restrictions',
                     'Solved problems Replit and CodeSandbox cannot address',
                 ],
@@ -450,221 +459,194 @@ const greet = (name) => \`Hello \${name}\`;
         title: 'EngineerSmith',
         role: 'Lead Developer',
         timeline: 'Jan 2025 - Present',
-        tagline: 'Certification platform filling the gap between weak multiple-choice tests and expensive enterprise hiring tools',
-        overview: `Built a standalone certification platform for coding skills that actually validates ability — not memorization. 
-    Unlike W3Schools (multiple choice quizzes) or HackerRank (enterprise pricing), EngineerSmith combines real code execution 
-    against test cases with meaningful certifications accessible to individuals and organizations.
+        tagline: 'Multi-tenant certification platform with secure code execution across 6 languages',
+        overview: `Built a certification and assessment platform for coding skills that validates real ability through 
+    code execution against test cases. Unlike multiple-choice quizzes or enterprise-priced hiring tools, 
+    EngineerSmith combines secure multi-language execution with meaningful certifications at accessible pricing.
 
-    The platform features multi-runtime code execution across 4 languages, 5 question types with semantic auto-grading, 
-    and complete multi-tenant organization management. In January 2026, migrated the entire backend from Express to NestJS 
-    in 36 hours while simultaneously redesigning the UI and implementing load testing infrastructure.
+    The platform supports 6 languages (JavaScript, TypeScript, Python, SQL, Dart, Swift) and 6 question types. 
+    A priority-based execution queue ensures certification exams are never delayed by practice traffic, while 
+    security scanning blocks malicious code before it reaches the runners. Designed to handle 50+ concurrent 
+    users on a 2GB server through memory-optimized runners and intelligent concurrency control.
     
-    Business model: B2B organizations (correctional facilities, schools, bootcamps) create custom assessments and manage users. 
-    B2C individuals use EngineerSmith's standardized certification exams to prove real coding ability.`,
+    Multi-tenant architecture allows organizations (correctional facilities, bootcamps, schools) to create 
+    custom assessments while sharing a global question pool. SSO integration with Simply Coding enables 
+    seamless student access.`,
         challenges: [
-            'Execute untrusted code safely across multiple language runtimes',
-            'Fill market gap: no platform combines docs + real code execution + meaningful certs',
-            'Multi-tenant isolation with shared global question pools',
-            'Semantic validation that accepts multiple correct solutions (arrow functions, declarations, etc.)',
-            'Production stability on limited resources (2GB RAM / 1 CPU)',
+            'Execute untrusted code safely across 6 language runtimes',
+            'Handle 50+ concurrent users on limited infrastructure (2GB RAM)',
+            'Prioritize certification exams over practice submissions',
+            'Block malicious code patterns without false positives on legitimate student code',
+            'Support Swift for upcoming mobile curriculum',
         ],
         highlights: [
+            { label: 'Languages', value: '6' },
+            { label: 'Question Types', value: '6' },
             { label: 'Concurrent Users', value: '50+' },
-            { label: 'Avg Response', value: '240ms' },
-            { label: 'NestJS Migration', value: '36 hrs' },
-            { label: 'Question Types', value: '5' },
+            { label: 'Memory/Runner', value: '64-128MB' },
+        ],
+        demos: [
+            {
+                title: 'Test Session Flow',
+                description: 'Complete certification exam demonstrating all question types with real-time code execution and grading',
+                videoUrl: 'https://res.cloudinary.com/deoee4emw/video/upload/v1769180405/Screen_Recording_2026-01-22_143924_njj3fs.mp4',
+            },
+            {
+                title: 'Code Lab',
+                description: 'LeetCode-style practice challenges with multi-language support and instant feedback',
+                videoUrl: 'https://res.cloudinary.com/deoee4emw/video/upload/v1769180411/Screen_Recording_2026-01-22_151330_no1f1x.mp4',
+            },
         ],
         features: [
             {
-                title: 'Multi-Runtime Code Execution Engine',
-                problem: `Existing certification platforms use multiple choice (W3Schools) or are priced for enterprise hiring 
-        (HackerRank at $50-100K/year). Nobody offers real code execution with test case validation at accessible pricing 
-        for education and individual learners.`,
-                solution: `Built separate runners for each runtime: Node.js with child_process spawning, Python via 
-        Pyodide (WebAssembly), SQL via sql.js. Each runner intercepts console output, executes test cases with memory 
-        limits and timeouts, and returns structured results with per-test console logs for debugging.`,
+                title: 'Priority-Based Execution Queue',
+                problem: `Running untrusted student code on a 2GB server with 50+ concurrent users. Without controls, 
+        a few infinite loops or memory-hungry submissions during practice could crash the platform while 
+        students are taking certification exams.`,
+                solution: `Built an in-memory priority queue with concurrency limits. Certification exam submissions 
+        get high priority and jump ahead of practice submissions. The queue enforces both total concurrent 
+        limits and per-language limits to prevent any single language from monopolizing resources.`,
                 technicalDetails: [
-                    'Node runner: Child process with --max-old-space-size=128, timeout via SIGTERM/SIGKILL',
-                    'Python runner: Pyodide WebAssembly with sys.stdout/stderr override',
-                    'SQL runner: sql.js with schema setup, seed data, result comparison',
-                    'Console capture: Override console.log to array, restore for result output',
-                    'Deep equality comparison for complex return types (arrays, objects, NaN)',
-                    'Smart function calling: handles single param vs spread args edge cases',
+                    'Priority levels: high (test sessions) vs normal (practice/admin)',
+                    'Concurrency limits: 8 total, 3 per language (configurable via env vars)',
+                    'Queue metrics: depth, wait times, jobs processed, health status',
+                    'Jobs never dropped - always execute eventually',
+                    'Admin endpoints for monitoring queue health',
                 ],
                 businessImpact: [
-                    'Students get real execution feedback, not string matching',
-                    'Console logs help students debug failing tests',
+                    'Certification exams never delayed by practice traffic',
+                    'Server stays stable under load',
+                    'Real-time visibility into system health',
+                    'Scales to 50+ concurrent users on $25/month infrastructure',
+                ],
+            },
+            {
+                title: 'Security Scanner',
+                problem: `Students (intentionally or accidentally) could submit code with infinite loops, file system 
+        access, network calls, or other dangerous operations that could crash the server or access 
+        unauthorized resources.`,
+                solution: `Built a pre-execution security scanner that checks code against language-specific banned 
+        patterns. Malicious code is rejected immediately without entering the queue or consuming execution 
+        resources.`,
+                technicalDetails: [
+                    'JavaScript/TypeScript: blocks eval(), require("fs"), process.exit, __proto__, infinite loops',
+                    'Python: blocks import os, subprocess, exec(), eval(), while True',
+                    'Swift: blocks FileManager, URLSession, Process, dangerous imports',
+                    'Dart: blocks dart:io, dart:ffi, Process, File(), Socket',
+                    'SQL: blocks INTO OUTFILE, SLEEP(), BENCHMARK(), multiple statements',
+                    'Universal: path traversal patterns (../)',
+                    'Metrics tracking: total scans, rejections, recent violations',
+                ],
+                businessImpact: [
+                    'Malicious code rejected before consuming resources',
+                    'Clear error messages help students understand what is not allowed',
+                    'Admin visibility into security rejection patterns',
+                    'No false positives on legitimate student code',
+                ],
+            },
+            {
+                title: 'Multi-Language Runner Architecture',
+                problem: `Supporting 6 languages with consistent behavior, error handling, and resource limits. 
+        Each language has different execution models and memory characteristics.`,
+                solution: `Standardized runner interface with language-specific implementations. Each runner creates 
+        temp files, spawns processes with memory limits, captures console output, enforces timeouts, 
+        and cleans up. Replaced Pyodide (WebAssembly Python) with subprocess execution for 50% memory reduction.`,
+                technicalDetails: [
+                    'Consistent interface: run(code, entryFunction, testCases, timeout) → GradingResult',
+                    'Node.js: --max-old-space-size=128 (128MB limit)',
+                    'Python: subprocess with resource.setrlimit (~128MB limit)',
+                    'Dart: --old-gen-heap-size=64 (64MB limit)',
+                    'Swift: subprocess execution for iOS curriculum',
+                    'SQL: sql.js in-memory with 1000 row limit',
+                    'All runners: 1MB output limit, configurable timeout',
+                    'Console capture per test case for student debugging',
+                ],
+                businessImpact: [
+                    'Swift ready for Arizona location starting mobile curriculum next month',
+                    'Consistent error messages across all languages',
+                    'Students see console output per test for debugging',
+                    'Adding new languages follows established pattern',
+                ],
+            },
+            {
+                title: 'Multi-Runtime Code Execution',
+                problem: `Certification platforms either use multiple choice (no real validation) or are priced 
+        for enterprise hiring ($50-100K/year). No accessible option for real code execution with test 
+        case validation.`,
+                solution: `Built separate runners for each runtime that execute student code in isolated processes, 
+        run test cases, capture console output, and return structured results with pass/fail per test.`,
+                technicalDetails: [
+                    'Test harness injected into student code with deep equality comparison',
+                    'Handles edge cases: NaN equality, array/object comparison, undefined values',
+                    'Smart function calling: single param vs spread args',
+                    'Timeout enforcement with SIGTERM → SIGKILL escalation',
+                    'Temp directory isolation with cleanup on completion',
+                ],
+                businessImpact: [
                     'Certifications prove actual coding ability, not memorization',
+                    'Console logs help students debug failing tests',
                     'Accessible pricing vs enterprise hiring platforms',
                 ],
-                codeExample: {
-                    language: 'javascript',
-                    code: `// Console capture in Node runner
-const consoleLogs = [];
-const originalConsoleLog = console.log;
-
-console.log = (...args) => {
-  const message = args.map(arg => 
-    typeof arg === 'object' 
-      ? JSON.stringify(arg) 
-      : String(arg)
-  ).join(' ');
-  consoleLogs.push({ type: 'log', message });
-};
-
-// Execute student code with timeout protection
-const child = spawn('node', 
-  ['--max-old-space-size=128', scriptPath],
-  { stdio: ['ignore', 'pipe', 'pipe'] }
-);
-
-// SIGTERM → SIGKILL escalation for hung processes
-setTimeout(() => child.kill('SIGTERM'), timeoutMs);`,
-                    caption: 'Sandboxed execution with console capture and resource limits',
-                },
-            },
-            {
-                title: 'Express → NestJS Migration (36 Hours)',
-                problem: `Legacy Express codebase had memory leaks causing production instability. Test sessions were 
-        crashing unpredictably. Needed enterprise-grade architecture without enterprise timeline.`,
-                solution: `Complete backend rewrite to NestJS with proper module isolation, dependency injection, 
-        and structured error handling. Included comprehensive load testing to validate stability before deployment. 
-        Simultaneously redesigned the entire UI from generic blue SaaS template to distinctive orange/dark brand identity.`,
-                technicalDetails: [
-                    'Full NestJS modular architecture: auth, grading, test-session, question, organization modules',
-                    'Dependency injection for testability and loose coupling',
-                    'Global exception filters with consistent error response format',
-                    'Rate limiting with tiered throttling (3/s, 20/10s, 100/min)',
-                    'JWT authentication with HTTP-only cookies and CSRF protection',
-                    'Custom load testing script simulating concurrent test-takers',
-                ],
-                businessImpact: [
-                    'Fixed memory leaks affecting production stability',
-                    'Load tested to 50+ concurrent users with 72% success rate',
-                    'Professional brand identity vs generic template',
-                    'Completed in 36 hours including UI redesign',
-                ],
-            },
-            {
-                title: 'Load Testing Infrastructure',
-                problem: `Deploying to production (2GB RAM / 1 CPU on Render) without knowing capacity limits. 
-        Correctional facilities can't afford platform crashes during certification exams.`,
-                solution: `Built custom load testing script that creates test users, simulates concurrent logins, 
-        starts test sessions simultaneously, answers questions with realistic timing, and reports detailed 
-        performance metrics by endpoint.`,
-                technicalDetails: [
-                    'Configurable user count with staggered or simultaneous starts',
-                    'Realistic mode (10-45s per question) vs fast mode (500ms-2s) for stress testing',
-                    'Automatic test user cleanup after runs',
-                    'Per-endpoint response time breakdown (avg, min, max)',
-                    'Success rate tracking and error categorization',
-                    'MongoDB direct connection for user creation/cleanup',
-                ],
-                businessImpact: [
-                    'Identified capacity ceiling: ~35-40 concurrent users on current infrastructure',
-                    '20 users: 95% success rate, 238ms avg response',
-                    '50 users: 72% success rate, 240ms avg response (ceiling found)',
-                    'Data-driven infrastructure scaling decisions',
-                ],
-                codeExample: {
-                    language: 'bash',
-                    code: `# Realistic timing (human-like delays)
-node scripts/loadTest.js --testId=abc123 --users=20
-
-# Stress test (rapid-fire)
-node scripts/loadTest.js --testId=abc123 --users=50 --fast
-
-# Results:
-# ════════════════════════════════════════
-# 📊 LOAD TEST RESULTS
-# ════════════════════════════════════════
-#   Duration: 3m 19s
-#   Users: 50
-#   Success Rate: 72%
-#   Avg Response Time: 240ms
-#   Requests/sec: 26.15`,
-                    caption: 'Custom load testing with realistic and stress test modes',
-                },
             },
             {
                 title: 'Multi-Tenant Organization System',
                 problem: `Platform needs to support multiple organizations (correctional facilities, schools, bootcamps) 
-        with isolated data, while allowing EngineerSmith to manage all organizations and share global certification 
-        content across tenants.`,
-                solution: `Built hierarchical multi-tenant architecture. Super org (EngineerSmith) creates child 
-        organizations with invite codes. Questions and tests can be organization-scoped or global. B2B clients 
-        create custom content; B2C individuals use standardized certifications.`,
+        with isolated data while sharing global certification content.`,
+                solution: `Hierarchical multi-tenant architecture. Organizations have invite codes for self-service 
+        registration. Questions and tests can be organization-scoped or global. SSO integration with 
+        Simply Coding for seamless access.`,
                 technicalDetails: [
-                    'Organization model: name, inviteCode, isSuperOrg flag',
-                    'User → Organization: many-to-one with role-based permissions',
-                    'Questions/Tests: organizationId for scoping, isGlobal for sharing',
-                    'Invite code registration: validates code, assigns to org automatically',
-                    'Role hierarchy: student < instructor < admin < super org admin',
-                    'SSO integration for partner platforms (Simply Coding)',
+                    'Organization model with invite codes and role hierarchy',
+                    'Question/test scoping: organizationId for private, isGlobal for shared',
+                    'Role hierarchy: student < instructor < admin',
+                    'SSO token exchange with Simply Coding platform',
+                    'Attempt limits with instructor override capability',
                 ],
                 businessImpact: [
-                    'B2B: Organizations pay for seats, create custom assessments',
-                    'B2C: Individuals use standardized certs to prove skills',
+                    'B2B: Organizations create custom assessments',
                     'Global questions reduce duplication across orgs',
-                    'Invite codes enable self-service registration',
+                    'Self-service registration via invite codes',
+                    'SSO eliminates password management for Simply Coding students',
                 ],
-                codeExample: {
-                    language: 'typescript',
-                    code: `// Student sees both org-specific and global tests
-const tests = await this.testModel.aggregate([
-  {
-    $match: {
-      status: 'active',
-      $or: [
-        { organizationId: student.organizationId },
-        { isGlobal: true }
-      ]
-    }
-  },
-  // Lookup completed sessions for attempt tracking
-  // Calculate remaining attempts with instructor overrides
-]);`,
-                    caption: 'Multi-tenant query pattern with global content sharing',
-                },
             },
             {
                 title: 'Test Session Management',
-                problem: `Students taking tests need answer persistence, server-side time enforcement, attempt limits, 
-        and protection against browser crashes. Can't trust client-side timing (easily manipulated).`,
-                solution: `Built complete test session lifecycle with immutable snapshots. When a student starts a test, 
-        a snapshot captures the exact questions (won't change even if test is edited). Sessions track status, 
-        answers persist across page refreshes, and instructors can grant extra attempts.`,
+                problem: `Students taking timed certification exams need answer persistence, server-side time 
+        enforcement, and protection against browser crashes. Client-side timing can be manipulated.`,
+                solution: `Complete test session lifecycle with immutable question snapshots. Sessions track state, 
+        persist answers across refreshes, enforce time limits server-side, and support instructor-granted 
+        extra attempts.`,
                 technicalDetails: [
-                    'Test snapshot: immutable copy of questions when session starts',
+                    'Immutable question snapshot when session starts',
                     'Session states: active → completed/expired/abandoned',
-                    'Answer persistence: saves on every question change',
-                    'Server-side time tracking: can\'t manipulate client clock',
-                    'StudentTestOverride: instructors grant extra attempts',
-                    'AttemptRequest: students request retakes with reason',
+                    'Answer persistence on every question change',
+                    'Server-side time tracking (no client clock manipulation)',
+                    'WebSocket for real-time session updates',
+                    'Instructor overrides for extra attempts',
                 ],
                 businessImpact: [
-                    'No lost work if browser closes unexpectedly',
+                    'No lost work if browser closes',
                     'Fair time enforcement for all students',
-                    'Instructors have flexibility for legitimate retakes',
-                    'Audit trail for compliance and dispute resolution',
+                    'Audit trail for compliance',
+                    'Flexibility for legitimate retakes',
                 ],
             },
         ],
         techStack: [
             { category: 'Backend', items: ['NestJS', 'TypeScript', 'Node.js', 'Mongoose'] },
-            { category: 'Frontend', items: ['React 19', 'TypeScript', 'Tailwind CSS', 'Monaco Editor'] },
-            { category: 'Database', items: ['MongoDB', 'Aggregation Pipelines'] },
-            { category: 'Execution', items: ['Child Process', 'Pyodide', 'sql.js', 'Worker Threads'] },
-            { category: 'Infrastructure', items: ['Render', 'Cloudflare', 'MongoDB Atlas'] },
-            { category: 'Auth', items: ['JWT', 'HTTP-only Cookies', 'CSRF', 'SSO'] },
+            { category: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS', 'Monaco Editor'] },
+            { category: 'Database', items: ['MongoDB Atlas'] },
+            { category: 'Execution', items: ['Node.js', 'Python', 'Dart', 'Swift', 'sql.js'] },
+            { category: 'Infrastructure', items: ['Render', 'Cloudflare', 'WebSocket'] },
+            { category: 'Security', items: ['JWT', 'HTTP-only Cookies', 'Code Scanner', 'SSO'] },
         ],
         outcomes: [
-            'Production platform at engineersmith.com serving Simply Coding certifications',
-            'Express → NestJS migration completed in 36 hours with UI redesign',
-            'Load tested to 50+ concurrent users, identified capacity ceiling',
-            'Multi-tenant SaaS architecture ready for B2B licensing',
-            'Filling market gap: real code execution + meaningful certs + accessible pricing',
-            'No competitor combines W3Schools-style docs + CodeSignal-style challenges + rigorous certifications',
+            'Production platform serving Simply Coding certifications',
+            '6 languages with secure, memory-limited execution',
+            'Priority queue ensures exam reliability under load',
+            'Security scanner blocks malicious code patterns',
+            'Swift support ready for mobile curriculum launch',
+            'Designed for 50+ concurrent users on $25/month infrastructure',
         ],
         color: '#f59e0b',
     },

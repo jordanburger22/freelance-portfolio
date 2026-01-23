@@ -103,6 +103,47 @@ const ProjectDetailPage = () => {
           </div>
         </section>
 
+        {/* Demos Section */}
+        {project.demos && project.demos.length > 0 && (
+          <section className="py-12 px-6 md:px-12 lg:px-24">
+            <div className="max-w-5xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                  Live Demos
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {project.demos.map((demo) => (
+                    <div 
+                      key={demo.title}
+                      className="bg-surface border border-border rounded-xl overflow-hidden hover:border-accent/30 transition-colors"
+                    >
+                      <div className="relative aspect-video bg-background">
+                        <video 
+                          controls
+                          className="w-full h-full object-contain"
+                          preload="metadata"
+                        >
+                          <source src={demo.videoUrl} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                      <div className="p-5">
+                        <h3 className="font-semibold text-text-primary mb-2">{demo.title}</h3>
+                        <p className="text-sm text-text-secondary">{demo.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        )}
+
         {/* Overview */}
         <section className="py-12 px-6 md:px-12 lg:px-24">
           <div className="max-w-5xl mx-auto">
