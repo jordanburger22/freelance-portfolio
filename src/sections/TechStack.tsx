@@ -12,7 +12,7 @@ const TechStack = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1,
+                staggerChildren: 0.08,
             },
         },
     };
@@ -61,27 +61,26 @@ const TechStack = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="mb-12"
                 >
-                    <div className="bg-surface border border-border rounded-xl overflow-hidden">
+                    <div className="bg-surface border border-border rounded-xl overflow-hidden hover:border-border-hover transition-colors duration-300">
                         <div className="h-1 w-full bg-gradient-to-r from-accent via-accent/50 to-transparent" />
                         <div className="p-8">
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
-                                    <div className="bg-background border border-border rounded-lg p-5">
+                                    <div className="group bg-background border border-border rounded-lg p-5 hover:border-accent/20 transition-all duration-300">
                                         <h4 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-accent">▹</span>
-                                            Pattern Recognition Over Memorization
+                                            <span className="text-accent group-hover:translate-x-0.5 transition-transform">▹</span>
+                                            AI as a Tool, Not a Gimmick
                                         </h4>
                                         <p className="text-text-secondary text-sm leading-relaxed">
-                                            Built a Reddit-style heat algorithm through first-principles reasoning,
-                                            arriving at nearly identical solution without knowing their approach.
-                                            Recognized that AR compatibility needed a rules engine while pistol
-                                            compatibility only needed data queries — different problem classes,
-                                            different solutions.
+                                            Integrated 3 different LLM APIs across production systems: Anthropic Claude
+                                            for context-aware TTRPG generation (16 endpoints), OpenAI Assistants API
+                                            for AI tutoring (built in 1 day), and GPT-4o for dual-stage data validation.
+                                            Each integration solves a specific problem — not AI for AI's sake.
                                         </p>
                                     </div>
-                                    <div className="bg-background border border-border rounded-lg p-5">
+                                    <div className="group bg-background border border-border rounded-lg p-5 hover:border-accent/20 transition-all duration-300">
                                         <h4 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-accent">▹</span>
+                                            <span className="text-accent group-hover:translate-x-0.5 transition-transform">▹</span>
                                             Constraint-Driven Architecture
                                         </h4>
                                         <p className="text-text-secondary text-sm leading-relaxed">
@@ -92,28 +91,27 @@ const TechStack = () => {
                                     </div>
                                 </div>
                                 <div className="space-y-4">
-                                    <div className="bg-background border border-border rounded-lg p-5">
+                                    <div className="group bg-background border border-border rounded-lg p-5 hover:border-accent/20 transition-all duration-300">
                                         <h4 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-accent">▹</span>
+                                            <span className="text-accent group-hover:translate-x-0.5 transition-transform">▹</span>
+                                            Velocity Under Constraints
+                                        </h4>
+                                        <p className="text-text-secondary text-sm leading-relaxed">
+                                            52,000-line data pipeline in one week. AI tutoring platform in one day.
+                                            24,700-line TTRPG platform in nights and weekends. Two jobs, four kids —
+                                            every architectural decision has to count when time is your scarcest resource.
+                                        </p>
+                                    </div>
+                                    <div className="group bg-background border border-border rounded-lg p-5 hover:border-accent/20 transition-all duration-300">
+                                        <h4 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
+                                            <span className="text-accent group-hover:translate-x-0.5 transition-transform">▹</span>
                                             Security as Architecture, Not Afterthought
                                         </h4>
                                         <p className="text-text-secondary text-sm leading-relaxed">
-                                            I design security as part of the system’s shape, not a layer added at the end.
-                                            That means edge protection, monitoring, rate limiting, TOTP/MFA, email verification,
-                                            CAPTCHA, and HTTP-only auth via reverse proxy are part of the foundation from day one—
-                                            not something bolted on after a breach exposes the gaps.
-                                        </p>
-                                    </div>
-                                    <div className="bg-background border border-border rounded-lg p-5">
-                                        <h4 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-accent">▹</span>
-                                            Infrastructure When It Doesn't Exist
-                                        </h4>
-                                        <p className="text-text-secondary text-sm leading-relaxed">
-                                            Built custom Datadog agent proxy for Render when native
-                                            support didn't exist. Implemented server-side code execution
-                                            with console capture across 7 languages. When the tool doesn't
-                                            exist, I build it.
+                                            Eliminated 7 security vulnerability categories including command injection and RCE.
+                                            Enterprise auth from scratch (TOTP, MFA, progressive lockout). Edge protection,
+                                            monitoring, and HTTP-only auth via reverse proxy — part of the foundation from
+                                            day one, not bolted on after a breach.
                                         </p>
                                     </div>
                                 </div>
@@ -147,17 +145,18 @@ const TechStack = () => {
                         <motion.div
                             key={category.name}
                             variants={itemVariants}
-                            className="group bg-surface border border-border rounded-xl p-6 hover:border-accent/30 transition-all duration-300"
+                            whileHover={{ y: -3 }}
+                            className="group bg-surface border border-border rounded-xl p-6 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
                         >
                             <h3 className="text-base font-semibold text-text-primary mb-4 flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                                <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:shadow-[0_0_8px_var(--color-accent)] transition-shadow duration-300" />
                                 {category.name}
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {category.items.map((item) => (
                                     <span
                                         key={item}
-                                        className="px-3 py-1.5 text-xs font-mono bg-background text-text-secondary rounded-lg border border-border hover:text-accent hover:border-accent/50 transition-colors cursor-default"
+                                        className="px-3 py-1.5 text-xs font-mono bg-background text-text-secondary rounded-lg border border-border hover:text-accent hover:border-accent/50 hover:bg-accent/5 transition-all duration-200 cursor-default"
                                     >
                                         {item}
                                     </span>

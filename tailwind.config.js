@@ -9,9 +9,12 @@ export default {
       colors: {
         background: '#0a0a0a',
         surface: '#141414',
+        'surface-elevated': '#1a1a1a',
         border: '#262626',
+        'border-hover': '#333333',
         accent: '#3b82f6',
         'accent-hover': '#2563eb',
+        'accent-glow': '#3b82f640',
         'text-primary': '#fafafa',
         'text-secondary': '#a1a1aa',
       },

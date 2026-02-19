@@ -43,165 +43,124 @@ export const projectDetails: Record<string, ProjectDetail> = {
     gunkustom: {
         id: 'gunkustom',
         title: 'GunKustom',
-        role: 'CTO / Senior Full Stack Engineer',
+        role: 'Acting CTO — Senior Full Stack Engineer',
         timeline: 'Sep 2024 - Present',
-        tagline: 'Production-grade firearms e-commerce platform with 31 interconnected systems',
-        overview: `Built a complete e-commerce platform for AR-15/AR-10/AR-9 parts from the ground up. 
-    Not just CRUD operations — this includes a sophisticated compatibility engine encoding mechanical 
-    engineering constraints, enterprise-grade authentication, content moderation, real-time 
-    price tracking, and a full social platform with community builds and forums.
-    
-    At MVP launch (Jan 2026), I owned 78.5% of the entire production codebase — 153,075 lines across 
-    backend, frontend, and scraper systems. The backend alone was 49,355 lines written in 3 months 
-    while simultaneously working full-time at Simply Coding.`,
+        tagline: 'Firearms e-commerce platform — 60.2% of codebase built as sole technical lead',
+        overview: `Architected the technical foundation for a firearms e-commerce startup as Acting CTO. Built
+    60.2% of the platform codebase (git-verified across 3 repositories) spanning a NestJS backend,
+    React frontend, and data ingestion pipeline — 219,345+ lines contributed across 305 commits.
+
+    The platform includes parts compatibility checking, a community builds social platform,
+    AI-powered content moderation, real-time price tracking, enterprise authentication, and a
+    52,884-line data pipeline I sole-authored in one week that processes thousands of products
+    daily with dual-stage AI validation.`,
         challenges: [
-            'No existing codebase — built from scratch with no technical co-founder',
-            'Complex domain: firearms compatibility involves mechanical engineering constraints',
-            'Enterprise requirements on startup timeline and budget',
-            'Needed social features, e-commerce, and content moderation all integrated',
+            'No existing codebase — built from scratch as sole technical lead',
+            'Complex domain requiring deep understanding of product compatibility',
+            'Enterprise-grade requirements on startup timeline and budget',
+            'Needed social features, e-commerce, data ingestion, and content moderation all integrated',
         ],
         highlights: [
-            { label: 'Code at MVP Launch', value: '78.5%' },
-            { label: 'Backend in 3 Months', value: '49K lines' },
-            { label: 'Systems Architected', value: '31' },
-            { label: 'Time to Replicate', value: '6-12 mo' },
+            { label: 'Platform Codebase', value: '60.2%' },
+            { label: 'Data Pipeline in 1 Week', value: '52K lines' },
+            { label: 'Total Commits', value: '305' },
+            { label: 'Lines Contributed', value: '219K+' },
         ],
         features: [
             {
-                title: 'AR Compatibility Engine',
-                problem: `AR-15/AR-10/AR-9 platforms have complex mechanical interdependencies. A wrong bolt face 
-        with a barrel means the gun won't cycle. Wrong buffer weight means reliability issues. Customers 
-        were buying incompatible parts, leading to expensive returns and frustrated users.`,
-                solution: `Built a rules engine that encodes mechanical engineering constraints into 
-        executable validation logic. The system evaluates parts across multiple platforms, checking 
-        compatibility factors like bolt face, gas systems, buffers, and threading patterns.`,
+                title: 'Data Ingestion Pipeline (ForwardAssist V2)',
+                problem: `The platform needed to aggregate product data from multiple sources — distributor feeds,
+        manufacturer catalogs, and web scraping — to build a comprehensive parts database. Manual data
+        entry was unsustainable at scale.`,
+                solution: `Sole-authored a 52,884-line data pipeline in one week. 6-stage ETL pipeline that ingests
+        data from feeds and web scraping, matches products using dual-strategy algorithms (exact MPN lookup +
+        fuzzy matching), and validates unknowns with two-stage AI (GPT-4o-mini screening, GPT-4o confirmation).`,
                 technicalDetails: [
-                    'Custom rules engine architecture for complex part interdependencies',
-                    'Weighted scoring system for different severity levels',
-                    'User-friendly message generation explaining compatibility issues',
-                    'Handles edge cases and data normalization from multiple vendors',
+                    '6-stage ETL: ingest → normalize → match → validate → enrich → publish',
+                    'Dual-strategy product matching for high accuracy',
+                    'Two-stage AI validation pipeline for unknown products',
+                    'Live monitoring dashboard with WebSocket updates',
+                    'Automated scheduling for daily feed processing and price syncs',
                 ],
                 businessImpact: [
-                    'Prevents expensive returns from incompatible purchases',
-                    'Core intellectual property — significant time investment to replicate',
+                    'Processes thousands of products daily from multiple sources',
+                    'Automated what would require a full-time data team',
+                    'AI validation catches edge cases humans would miss',
+                    'Built in 1 week — demonstrates velocity and technical depth',
+                ],
+            },
+            {
+                title: 'Parts Compatibility System',
+                problem: `Firearms parts have complex compatibility requirements. Customers were purchasing
+        incompatible parts, leading to returns and frustration. No competitor offers real-time
+        compatibility checking.`,
+                solution: `Built a system that validates part compatibility across multiple product categories,
+        providing real-time feedback to customers before purchase. Handles both complex interdependency
+        checks and simpler attribute-based matching depending on the product category.`,
+                technicalDetails: [
+                    'Multiple validation strategies for different product categories',
+                    'Real-time compatibility feedback in the shopping experience',
+                    'Handles data normalization across multiple vendors and formats',
+                    'Extensible architecture for adding new product categories',
+                ],
+                businessImpact: [
+                    'Prevents returns from incompatible purchases',
                     'Builds customer trust through accurate recommendations',
-                    'No firearms retailer has comparable functionality',
+                    'Unique differentiator in the firearms retail space',
                 ],
             },
             {
-                title: 'Pistol Compatibility Framework',
-                problem: `After building the AR engine, I needed to add pistol support (Glock, Sig P320, 1911, etc.). 
-        The initial instinct was to extend the rules engine, but that would've been over-engineering.`,
-                solution: `Recognized that pistol compatibility is a fundamentally different problem class. ARs have 
-        complex interdependencies requiring a rules engine. Pistols have isolated attributes — a Glock Gen 5 
-        slide fits Gen 5 frames, period. Built a data-driven schema with platform-specific fields instead.`,
+                title: 'Community Platform & Content Moderation',
+                problem: `The platform needed social features (community builds, forums, comments) to drive
+        engagement, but user-generated content requires moderation at scale without a large team.`,
+                solution: `Built a complete community platform with gamification (XP, trust levels) and
+        defense-in-depth content moderation: user trust system, AI-powered image safety checking,
+        text filtering, and human review queue with team notifications.`,
                 technicalDetails: [
-                    'Universal schema with optional platform-specific fields',
-                    'Simple set intersection queries vs complex rule evaluation',
-                    'Extensible architecture — adding new platforms requires no code changes',
-                    'Right tool for the job: different problems, different solutions',
+                    'User trust and XP system with progressive privileges',
+                    'AI integration for automated image safety checking',
+                    'Multi-tier moderation: automated → AI → human review',
+                    'Community builds with multi-image upload and showcase',
                 ],
                 businessImpact: [
-                    'Scaled to 14+ pistol platforms with minimal code',
-                    'Demonstrated pattern recognition and architectural maturity',
-                    'Faster time-to-market for new platform support',
+                    'Scales moderation without large team',
+                    'Drives user engagement through social features and gamification',
+                    'Protects brand from harmful content automatically',
                 ],
             },
             {
-                title: 'Heat Algorithm (Forum Ranking)',
-                problem: `The forum needed a way to surface active discussions while letting old threads fade. 
-        New posts should get visibility, but engagement should boost rankings.`,
-                solution: `Independently invented a Reddit-style heat algorithm through first-principles reasoning. 
-        Posts start with base points, gain heat from replies and likes, and decay over time. Discovered 
-        later this is nearly identical to Reddit's approach — arrived at the same solution without knowing theirs.`,
+                title: 'Enterprise Authentication',
+                problem: `Needed production-grade auth for an e-commerce platform: MFA, account security,
+        admin roles — without enterprise licensing costs.`,
+                solution: `Built complete enterprise auth from scratch: TOTP/authenticator app support,
+        progressive lockout, trusted devices, and role-based access control.`,
                 technicalDetails: [
-                    'Activity-based scoring with engagement multipliers',
-                    'Time decay with grace periods for new content',
-                    'User trust levels influence initial scoring',
-                    'Self-maintaining system requiring no manual curation',
-                ],
-                businessImpact: [
-                    'Keeps active discussions visible automatically',
-                    'Rewards quality content and diverse engagement',
-                    'Zero admin intervention needed for ranking',
-                ],
-            },
-            {
-                title: 'Enterprise Authentication System',
-                problem: `Needed production-grade auth for an e-commerce platform: MFA, account security, 
-        admin roles — without paying for Auth0 ($50-100K/year at scale).`,
-                solution: `Built complete enterprise auth from scratch: TOTP/authenticator app support with 
-        encrypted secret storage, progressive lockout, trusted devices, timing-attack 
-        mitigation, and role-based access control.`,
-                technicalDetails: [
-                    'TOTP with encrypted secrets at rest',
-                    'Backup codes with secure hashing',
+                    'TOTP with encrypted secrets and backup codes',
                     'Progressive lockout with increasing penalties',
-                    'Trusted device management with secure token handling',
-                    'Timing-safe comparisons to prevent enumeration attacks',
+                    'Trusted device management',
+                    'Role-based access control for admin, editor, and user roles',
                 ],
                 businessImpact: [
                     'Enterprise-grade security at zero licensing cost',
-                    'Required for privileged roles (admin, editor, owner)',
-                    'Audit logging for compliance and security incidents',
-                ],
-            },
-            {
-                title: 'Content Moderation System',
-                problem: `User-generated content (community builds, forum posts, comments) needs moderation 
-        at scale. Can't manually review everything, but can't let harmful content through.`,
-                solution: `Built defense-in-depth moderation with multiple tiers: user trust system, 
-        image deduplication, text filtering, AI safety checking, and human review queue 
-        with team notifications.`,
-                technicalDetails: [
-                    'User trust levels with progressive privileges',
-                    'Image hashing to prevent re-upload of blocked content',
-                    'Text moderation with pattern detection',
-                    'AI integration for image safety checking',
-                    'Human review queue with notification integration',
-                ],
-                businessImpact: [
-                    'Scales without large moderation team',
-                    'Significant cost savings vs manual moderation',
-                    'Protects brand from harmful content',
-                    'Rewards good community members with trust',
-                ],
-            },
-            {
-                title: 'Price Tracking & Alerts',
-                problem: `Firearms parts prices fluctuate across vendors. Customers want to know when 
-        to buy, but no firearms retailer offers price tracking.`,
-                solution: `Built comprehensive price tracking: historical data, all-time low/high tracking, 
-        user-set price alerts, and back-in-stock notifications. Automated jobs track prices 
-        and trigger notifications across multiple channels.`,
-                technicalDetails: [
-                    'Daily price aggregation across vendors',
-                    'Rolling history for price trend visualization',
-                    'User alerts with customizable thresholds',
-                    'Stock monitoring with availability detection',
-                    'Multi-channel notifications (email + real-time)',
-                ],
-                businessImpact: [
-                    'Unique feature in firearms industry',
-                    'Drives purchases through timely alerts',
-                    'Improved conversion from accurate availability data',
+                    'Audit logging for compliance',
+                    'Saves significant annual licensing fees vs Auth0/Okta',
                 ],
             },
         ],
         techStack: [
-            { category: 'Backend', items: ['TypeScript', 'NestJS', 'Node.js', 'Express'] },
+            { category: 'Backend', items: ['TypeScript', 'NestJS', 'Node.js'] },
             { category: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-            { category: 'Database', items: ['MongoDB', 'Mongoose', 'Optimized Indexing'] },
+            { category: 'Database', items: ['MongoDB', 'Mongoose'] },
+            { category: 'Data Pipeline', items: ['GPT-4o', 'JSDOM', 'Fuzzy Matching', 'WebSocket'] },
             { category: 'Infrastructure', items: ['AWS', 'Docker', 'Cloudflare', 'Render'] },
-            { category: 'Security', items: ['JWT', 'TOTP', 'Encryption', 'RBAC'] },
-            { category: 'Monitoring', items: ['Datadog APM', 'Custom Integrations'] },
+            { category: 'Monitoring', items: ['Datadog APM', 'Sightengine'] },
         ],
         outcomes: [
             'MVP launched January 2026 with complete feature set',
-            'Platform handles hundreds of products with real-time compatibility checking',
+            '60.2% of platform codebase — git-verified across 3 repositories',
+            '52,884-line data pipeline sole-authored in 1 week',
+            '305 commits across backend, frontend, and data pipeline',
             'Enterprise-grade security without enterprise licensing costs',
-            'Social features drive engagement and user-generated content',
-            'Price tracking creates competitive moat',
         ],
         color: '#2c5530',
     },
@@ -209,16 +168,17 @@ export const projectDetails: Record<string, ProjectDetail> = {
     'simply-coding': {
         id: 'simply-coding',
         title: 'Simply Coding',
-        role: 'Instructor / Full Stack Developer',
+        role: 'Senior Full Stack Engineer — Platform Architect',
         timeline: 'Nov 2024 - Present',
-        tagline: 'Cloud IDE and LMS for correctional facilities where traditional tools cannot function',
-        overview: `Built a complete learning management system for environments where traditional cloud-based 
-    tools are impossible: maximum security prisons with restricted internet access, no terminal/console 
-    access, firewall restrictions, and air-gapped networks.
-    
-    This isn't a simplified tool — students learn modern React, Express, and TypeScript. The platform 
-    includes a browser-based IDE with server-side code execution, semantic code validation, and a 
-    complete LMS with progress tracking and auto-grading.`,
+        tagline: '330,000+ lines across 9 repositories — cloud IDE, LMS, certification engine, and AI tutoring',
+        overview: `Architected the complete technical platform for an educational company serving 500+ students —
+    330,000+ lines across 9 repositories spanning LMS, cloud IDE, certification engine, and AI tutoring.
+    Built for environments where Replit and CodeSandbox literally cannot function: maximum security prisons
+    with restricted internet access, no terminal access, and air-gapped networks.
+
+    Optimized builds 97% faster (60s → 0.6s), eliminated 7 security vulnerability categories, saved $4,320/year
+    in infrastructure costs, and migrated the entire backend from Express microservices to a NestJS monolith.
+    Built an AI tutoring system in a single day using OpenAI Assistants API.`,
         challenges: [
             'No CDN access (jsdelivr, unpkg blocked by prison firewalls)',
             'No terminal access for students (can\'t run npm, node commands)',
@@ -227,10 +187,10 @@ export const projectDetails: Record<string, ProjectDetail> = {
             'Must work through restrictive firewalls while maintaining server connection',
         ],
         highlights: [
-            { label: 'Active Students', value: '500+' },
-            { label: 'Facilities', value: '10+' },
-            { label: 'Build Speedup', value: '12-30x' },
-            { label: 'Languages Supported', value: '7' },
+            { label: 'Lines Across Platform', value: '330K+' },
+            { label: 'Faster Builds', value: '97%' },
+            { label: 'Annual Cost Savings', value: '$4,320' },
+            { label: 'Security Vulns Fixed', value: '7' },
         ],
         features: [
             {
@@ -255,11 +215,11 @@ export const projectDetails: Record<string, ProjectDetail> = {
             },
             {
                 title: 'Template Caching System',
-                problem: `Every code execution was running npm install — 60+ seconds per build. 
+                problem: `Every code execution was running npm install — 60+ seconds per build.
         With hundreds of students, this was unsustainable.`,
-                solution: `Built a template caching system with pre-built project templates. Instead of 
-        npm install on every build, copy cached node_modules (2-5 seconds). 12-30x performance 
-        improvement.`,
+                solution: `Built a template caching system with pre-built project templates. Instead of
+        npm install on every build, copy cached node_modules — 97% faster (60s → 0.6s). Saved $4,320/year
+        in infrastructure costs by reducing server load.`,
                 technicalDetails: [
                     'Pre-built templates with dependencies installed',
                     'Content-addressable storage for node_modules',
@@ -268,7 +228,8 @@ export const projectDetails: Record<string, ProjectDetail> = {
                     'Per-service concurrency limits (Express: 5, React: 3)',
                 ],
                 businessImpact: [
-                    '60+ seconds → 2-5 seconds per build',
+                    '97% faster builds: 60+ seconds → under 1 second',
+                    '$4,320/year infrastructure cost savings',
                     'Handles 500+ concurrent users without degradation',
                     'Students get instant feedback instead of waiting',
                 ],
@@ -335,20 +296,161 @@ const greet = (name) => \`Hello \${name}\`;
             },
         ],
         techStack: [
-            { category: 'Frontend', items: ['React', 'TypeScript', 'Monaco Editor', 'Custom Hooks'] },
-            { category: 'Backend', items: ['Node.js', 'Express', 'Rails 4.2.9 (legacy)'] },
+            { category: 'Frontend', items: ['React', 'TypeScript', 'Monaco Editor', 'Tailwind CSS'] },
+            { category: 'Backend', items: ['NestJS', 'Node.js', 'Express', 'Rails (legacy)'] },
+            { category: 'AI', items: ['OpenAI Assistants API', 'Context-Aware Generation'] },
             { category: 'Compilation', items: ['Vite', 'Webpack', 'Docker', 'Child Process Management'] },
-            { category: 'Database', items: ['PostgreSQL', 'S3 (asset storage)'] },
+            { category: 'Database', items: ['PostgreSQL', 'MongoDB', 'S3'] },
             { category: 'Infrastructure', items: ['AWS Elastic Beanstalk', 'Nginx', 'Docker'] },
         ],
         outcomes: [
-            '500+ students actively learning modern web development',
-            'Students in correctional facilities gain marketable skills',
-            '65% challenge completion rate (industry average: 40%)',
-            '400+ instructor hours saved annually on grading',
-            'Breaking cycles through technical education',
+            '330,000+ lines across 9 repositories — complete platform ownership',
+            '97% faster builds (60s → 0.6s) saving $4,320/year',
+            '7 security vulnerability categories eliminated',
+            'AI tutoring system built in 1 day with OpenAI Assistants API',
+            'V1→V2 architecture migration (Express → NestJS monolith)',
+            '500+ students across 10+ correctional facilities',
         ],
         color: '#3b82f6',
+    },
+
+    fablheim: {
+        id: 'fablheim',
+        title: 'Fablheim',
+        role: 'Solo Full Stack Developer — Personal Project',
+        timeline: 'Feb 2026 (Nights/Weekends)',
+        tagline: 'AI-powered TTRPG platform — 24.7K lines solo, 16 AI endpoints, real-time multiplayer',
+        overview: `Solo-built an AI-powered tabletop RPG campaign management platform in nights and weekends —
+    24,700+ lines of TypeScript reaching 95% MVP. Built to demonstrate full-stack + AI integration
+    skills outside of employment constraints.
+
+    The platform features context-aware AI generation via Anthropic Claude that builds prompts from
+    6 data sources (campaigns, characters, world, sessions, NPCs, relationships) — producing content
+    that understands each campaign's unique world, not generic ChatGPT output. Real-time WebSocket
+    multiplayer sessions with initiative tracking, dice rolling, and live presence. Supports 6 TTRPG
+    game systems: D&D 5e, Pathfinder 2e, Daggerheart, Call of Cthulhu, Fate Core, and custom systems.`,
+        challenges: [
+            'Context-aware AI that produces campaign-specific content, not generic output',
+            'Real-time multiplayer with initiative tracking, dice, and player presence',
+            'Supporting 6 different TTRPG rule systems with varied mechanics',
+            'Building a complete full-stack platform solo in nights/weekends',
+            'Designing an intuitive UX for complex tabletop game management',
+        ],
+        highlights: [
+            { label: 'Lines (Solo Build)', value: '24.7K' },
+            { label: 'AI Endpoints', value: '16' },
+            { label: 'MVP Complete', value: '95%' },
+            { label: 'Game Systems', value: '6' },
+        ],
+        features: [
+            {
+                title: 'Context-Aware AI Generation',
+                problem: `Generic AI tools produce generic content. A D&D campaign set in a steampunk world
+        needs NPCs, encounters, and plot hooks that reflect that specific setting — not default fantasy tropes.`,
+                solution: `Built a context pipeline that assembles prompts from 6 data sources: campaign settings,
+        party composition, session history, world lore, NPC relationships, and game system rules. The AI
+        generates content that's aware of the campaign's unique context.`,
+                technicalDetails: [
+                    '16 AI generation endpoints across 8 services via Anthropic Claude',
+                    'Context assembled from 6 data sources per generation request',
+                    'System-aware prompting adapts to D&D, Pathfinder, Daggerheart, etc.',
+                    'Token budgeting and response streaming for responsive UX',
+                    'Pedagogical guardrails prevent generic or off-theme content',
+                ],
+                businessImpact: [
+                    'Content feels campaign-specific, not AI-generated boilerplate',
+                    'DMs save hours of session prep per week',
+                    'Key differentiator vs generic AI chat tools',
+                ],
+            },
+            {
+                title: 'Real-Time Multiplayer Sessions',
+                problem: `Tabletop RPGs are inherently multiplayer. Players need to see initiative order, dice rolls,
+        and who's connected — all in real-time during sessions.`,
+                solution: `Built WebSocket-powered sessions with Socket.IO. Initiative tracker with drag-to-reorder,
+        dice roller with animated results, and live presence indicators showing connected players.`,
+                technicalDetails: [
+                    'Socket.IO WebSocket gateway with room-based sessions',
+                    'Initiative tracker with real-time reordering',
+                    'Dice roller supporting standard TTRPG notation (2d6+3, d20, etc.)',
+                    'User presence with connection status and activity indicators',
+                    'Role-based access (DM/Co-DM/Player) per campaign',
+                ],
+                businessImpact: [
+                    'Enables remote tabletop sessions without external voice/video tools',
+                    'Initiative tracking eliminates the most tedious part of combat',
+                    'Live presence builds social connection between players',
+                ],
+            },
+            {
+                title: 'Dual-Panel Tab System',
+                problem: `DMs need to reference multiple things simultaneously during sessions — NPCs, maps, notes,
+        AI tools — but traditional UIs force single-view navigation.`,
+                solution: `Built a VS Code-inspired dual-panel tab system (479 lines). Users can open any content
+        in left or right panels, drag tabs between panels, and maintain independent scroll positions.`,
+                technicalDetails: [
+                    '479-line tab management system inspired by VS Code UX',
+                    'Independent left/right panels with separate tab stacks',
+                    'Drag-and-drop tab reordering between panels',
+                    'Persistent tab state across page navigation',
+                    '8 different content types can be opened as tabs',
+                ],
+                businessImpact: [
+                    'DMs can reference NPCs while running encounters',
+                    'Side-by-side AI generation and manual editing',
+                    'Familiar UX pattern for developer-adjacent users',
+                ],
+                codeExample: {
+                    language: 'typescript',
+                    code: `// Tab system supports multiple content types
+type TabType =
+  | 'npc' | 'encounter' | 'location'
+  | 'plot-hook' | 'session' | 'character'
+  | 'ai-tool' | 'world-map';
+
+// Open any content in either panel
+openTab({ type: 'npc', id: npcId, panel: 'right' });
+openTab({ type: 'ai-tool', tool: 'encounter-gen', panel: 'left' });`,
+                    caption: 'VS Code-inspired dual-panel tab system for multitasking during sessions',
+                },
+            },
+            {
+                title: 'World Building & Campaign Management',
+                problem: `TTRPG campaigns involve complex webs of characters, locations, factions, and relationships
+        that are difficult to track across sessions.`,
+                solution: `Built a comprehensive world-building system with 9 entity types, relationship mapping,
+        and campaign-scoped organization. Supports 6 TTRPG game systems with system-specific mechanics.`,
+                technicalDetails: [
+                    '9 entity types: NPCs, locations, factions, items, quests, lore, maps, encounters, notes',
+                    'Relationship mapping between entities (ally, enemy, neutral, etc.)',
+                    '6 TTRPG systems: D&D 5e, Pathfinder 2e, Daggerheart, Call of Cthulhu, Fate Core, Custom',
+                    'Campaign-scoped data isolation with role-based access',
+                    'Demo data seeding (1,034 lines) for instant onboarding',
+                ],
+                businessImpact: [
+                    'All campaign data in one place vs scattered Google Docs',
+                    'Relationships surface narrative connections DMs might forget',
+                    'Multi-system support expands addressable market (50M+ TTRPG players)',
+                ],
+            },
+        ],
+        techStack: [
+            { category: 'Backend', items: ['NestJS 10', 'TypeScript', 'MongoDB', 'Mongoose'] },
+            { category: 'AI', items: ['Anthropic Claude API', 'Context Pipeline', 'Token Budgeting'] },
+            { category: 'Frontend', items: ['React 19', 'TypeScript', 'TanStack Query', 'Tailwind CSS'] },
+            { category: 'Real-time', items: ['Socket.IO', 'WebSocket Gateway', 'Room Management'] },
+            { category: 'Auth', items: ['JWT', 'Google OAuth', 'Cloudflare Turnstile'] },
+            { category: 'Infrastructure', items: ['Render', 'MongoDB Atlas', 'Cloudflare'] },
+        ],
+        outcomes: [
+            '24,700+ lines of TypeScript — 100% solo-built in nights/weekends',
+            '16 AI generation endpoints with context-aware Anthropic Claude integration',
+            'Real-time WebSocket multiplayer with initiative tracker and dice roller',
+            '16 NestJS modules, 17 MongoDB collections, 91+ REST endpoints',
+            '95% MVP complete while maintaining full-time employment',
+            'Custom fantasy design system with 8 keyframe animations',
+        ],
+        color: '#7c3aed',
     },
 
     'watts-bags': {
@@ -457,21 +559,21 @@ const greet = (name) => \`Hello \${name}\`;
     engineersmith: {
         id: 'engineersmith',
         title: 'EngineerSmith',
-        role: 'Lead Developer',
+        role: 'Lead Developer — B2B Certification Platform',
         timeline: 'Jan 2025 - Present',
-        tagline: 'Multi-tenant certification platform with secure code execution across 6 languages',
-        overview: `Built a certification and assessment platform for coding skills that validates real ability through 
-    code execution against test cases. Unlike multiple-choice quizzes or enterprise-priced hiring tools, 
-    EngineerSmith combines secure multi-language execution with meaningful certifications at accessible pricing.
+        tagline: 'Standalone B2B SaaS — 103K lines, 6 languages, secure code execution, white-label ready',
+        overview: `Built a standalone certification and assessment platform as a B2B SaaS product — 103,000 lines
+    of production code. Validates real coding ability through code execution against test cases, not
+    multiple-choice quizzes. Simply Coding is the first customer, with the platform designed for white-label
+    deployment to other educational institutions and corporate training programs.
 
-    The platform supports 6 languages (JavaScript, TypeScript, Python, SQL, Dart, Swift) and 6 question types. 
-    A priority-based execution queue ensures certification exams are never delayed by practice traffic, while 
-    security scanning blocks malicious code before it reaches the runners. Designed to handle 50+ concurrent 
-    users on a 2GB server through memory-optimized runners and intelligent concurrency control.
-    
-    Multi-tenant architecture allows organizations (correctional facilities, bootcamps, schools) to create 
-    custom assessments while sharing a global question pool. SSO integration with Simply Coding enables 
-    seamless student access.`,
+    Supports 6 languages (JavaScript, TypeScript, Python, SQL, Dart, Swift) and 6 question types.
+    Priority-based execution queue ensures certification exams are never delayed by practice traffic,
+    while security scanning blocks malicious code before execution. Handles 50+ concurrent users
+    on $25/month infrastructure through memory-optimized runners and intelligent concurrency control.
+
+    Multi-tenant architecture allows organizations to create custom assessments while sharing a global
+    question pool. Platform-agnostic design means any organization can onboard with invite codes and SSO.`,
         challenges: [
             'Execute untrusted code safely across 6 language runtimes',
             'Handle 50+ concurrent users on limited infrastructure (2GB RAM)',
@@ -480,10 +582,10 @@ const greet = (name) => \`Hello \${name}\`;
             'Support Swift for upcoming mobile curriculum',
         ],
         highlights: [
+            { label: 'Lines of Code', value: '103K' },
             { label: 'Languages', value: '6' },
-            { label: 'Question Types', value: '6' },
             { label: 'Concurrent Users', value: '50+' },
-            { label: 'Memory/Runner', value: '64-128MB' },
+            { label: 'Infrastructure Cost', value: '$25/mo' },
         ],
         demos: [
             {

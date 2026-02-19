@@ -9,7 +9,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Navbar = () => {
           }
         }
       }
-      
+
       // If at the top, no section is active
       if (window.scrollY < 300) {
         setActiveSection('');
@@ -58,7 +58,7 @@ const Navbar = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    
+
     if (href === '/') {
       navigate('/');
     } else {
@@ -86,7 +86,7 @@ const Navbar = () => {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-background/80 backdrop-blur-lg border-b border-border'
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-lg shadow-black/10'
           : 'bg-transparent'
       }`}
     >
@@ -96,7 +96,7 @@ const Navbar = () => {
           <a
             href="/"
             onClick={handleLogoClick}
-            className="hover:opacity-80 transition-opacity"
+            className="hover:opacity-80 transition-all duration-300"
           >
             <img src={logo} alt="Jordan Burger" className="h-8 w-auto" />
           </a>
@@ -111,7 +111,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className={`text-sm font-medium transition-colors relative ${
+                className={`text-sm font-medium transition-colors duration-200 relative py-1 ${
                   activeSection === item.href
                     ? 'text-accent'
                     : 'text-text-secondary hover:text-text-primary'
@@ -121,7 +121,7 @@ const Navbar = () => {
                 {activeSection === item.href && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full"
                     initial={false}
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
@@ -134,7 +134,7 @@ const Navbar = () => {
               transition={{ delay: 0.5 }}
               href="/resume.pdf"
               target="_blank"
-              className="px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-white rounded-lg transition-colors text-sm font-medium"
+              className="px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-white rounded-lg transition-all duration-300 text-sm font-medium hover:shadow-lg hover:shadow-accent/20"
             >
               Resume
             </motion.a>
@@ -143,7 +143,8 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-text-secondary hover:text-text-primary"
+            className="md:hidden p-2 text-text-secondary hover:text-text-primary transition-colors"
+            aria-label="Toggle menu"
           >
             <svg
               className="w-6 h-6"
@@ -179,7 +180,7 @@ const Navbar = () => {
           opacity: mobileMenuOpen ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
-        className="md:hidden overflow-hidden bg-surface border-b border-border"
+        className="md:hidden overflow-hidden bg-surface/95 backdrop-blur-xl border-b border-border"
       >
         <div className="px-6 py-4 space-y-4">
           {navItems.map((item) => (
@@ -187,7 +188,7 @@ const Navbar = () => {
               key={item.label}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className={`block transition-colors ${
+              className={`block py-1 transition-colors duration-200 ${
                 activeSection === item.href
                   ? 'text-accent'
                   : 'text-text-secondary hover:text-text-primary'
@@ -199,7 +200,7 @@ const Navbar = () => {
           <a
             href="/resume.pdf"
             target="_blank"
-            className="block px-4 py-2 border border-accent text-accent text-center rounded-lg"
+            className="block px-4 py-2 border border-accent text-accent text-center rounded-lg hover:bg-accent hover:text-white transition-all duration-300"
           >
             Resume
           </a>

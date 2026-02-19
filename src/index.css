@@ -4,16 +4,38 @@
 @theme {
   --color-background: #0a0a0a;
   --color-surface: #141414;
+  --color-surface-elevated: #1a1a1a;
   --color-border: #262626;
+  --color-border-hover: #333333;
   --color-accent: #3b82f6;
   --color-accent-hover: #2563eb;
+  --color-accent-glow: #3b82f640;
   --color-text-primary: #fafafa;
   --color-text-secondary: #a1a1aa;
-  
+
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
 }
 
+/* Keyframes */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 
 html {
   scroll-behavior: smooth;
@@ -24,11 +46,26 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -42,4 +79,17 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-text-secondary);
+}
+
+/* Utility: accent glow for interactive elements */
+.glow-accent {
+  box-shadow: 0 0 20px var(--color-accent-glow), 0 0 60px var(--color-accent-glow);
+}
+
+/* Stat number pop effect */
+.stat-value {
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

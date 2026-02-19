@@ -44,28 +44,28 @@ const ProjectDetailPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Link 
-                to="/#projects" 
-                className="inline-flex items-center gap-2 text-text-secondary hover:text-accent transition-colors mb-8 group"
+              <Link
+                to="/#projects"
+                className="inline-flex items-center gap-2 text-text-secondary hover:text-accent transition-colors duration-200 mb-8 group"
               >
-                <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
                 Back to Projects
               </Link>
 
               <div className="flex items-center gap-3 mb-4">
-                <div 
+                <div
                   className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: project.color }}
                 />
                 <span className="text-text-secondary font-mono text-sm">{project.timeline}</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-4 tracking-tight">
                 {project.title}
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-text-secondary mb-6">
                 {project.tagline}
               </p>
@@ -88,12 +88,12 @@ const ProjectDetailPage = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
-              {project.highlights.map((highlight, _index) => (
+              {project.highlights.map((highlight) => (
                 <div
                   key={highlight.label}
-                  className="bg-surface border border-border rounded-xl p-5 hover:border-accent/30 transition-colors"
+                  className="group bg-surface border border-border rounded-xl p-5 hover:border-accent/30 transition-all duration-300 hover:shadow-md hover:shadow-accent/5"
                 >
-                  <p className="text-3xl font-bold text-text-primary mb-1">
+                  <p className="text-3xl font-bold mb-1 stat-value">
                     {highlight.value}
                   </p>
                   <p className="text-sm text-text-secondary">{highlight.label}</p>
@@ -118,12 +118,12 @@ const ProjectDetailPage = () => {
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
                   {project.demos.map((demo) => (
-                    <div 
+                    <div
                       key={demo.title}
-                      className="bg-surface border border-border rounded-xl overflow-hidden hover:border-accent/30 transition-colors"
+                      className="group bg-surface border border-border rounded-xl overflow-hidden hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:shadow-black/20"
                     >
                       <div className="relative aspect-video bg-background">
-                        <video 
+                        <video
                           controls
                           className="w-full h-full object-contain"
                           preload="metadata"
@@ -133,7 +133,7 @@ const ProjectDetailPage = () => {
                         </video>
                       </div>
                       <div className="p-5">
-                        <h3 className="font-semibold text-text-primary mb-2">{demo.title}</h3>
+                        <h3 className="font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors duration-300">{demo.title}</h3>
                         <p className="text-sm text-text-secondary">{demo.description}</p>
                       </div>
                     </div>
@@ -156,7 +156,7 @@ const ProjectDetailPage = () => {
                 <span className="w-1.5 h-1.5 bg-accent rounded-full" />
                 Overview
               </h2>
-              <div className="bg-surface border border-border rounded-xl p-6 md:p-8">
+              <div className="bg-surface border border-border rounded-xl p-6 md:p-8 hover:border-border-hover transition-colors duration-300">
                 {project.overview.split('\n\n').map((paragraph, i) => (
                   <p key={i} className="text-text-secondary leading-relaxed mb-4 last:mb-0">
                     {paragraph.trim()}
@@ -181,12 +181,12 @@ const ProjectDetailPage = () => {
               </h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {project.challenges.map((challenge, index) => (
-                  <div 
+                  <div
                     key={index}
-                    className="bg-background border border-border rounded-xl p-5 flex items-start gap-4"
+                    className="group bg-background border border-border rounded-xl p-5 flex items-start gap-4 hover:border-accent/20 transition-all duration-300"
                   >
-                    <span className="text-accent font-mono text-sm">{String(index + 1).padStart(2, '0')}</span>
-                    <p className="text-text-secondary">{challenge}</p>
+                    <span className="text-accent font-mono text-sm opacity-60 group-hover:opacity-100 transition-opacity">{String(index + 1).padStart(2, '0')}</span>
+                    <p className="text-text-secondary group-hover:text-text-primary transition-colors duration-200">{challenge}</p>
                   </div>
                 ))}
               </div>
@@ -217,11 +217,13 @@ const ProjectDetailPage = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  className="bg-surface border border-border rounded-2xl overflow-hidden"
+                  className="group bg-surface border border-border rounded-2xl overflow-hidden hover:border-border-hover transition-colors duration-300"
                 >
-                  <div 
+                  <div
                     className="h-1 w-full"
-                    style={{ backgroundColor: project.color }}
+                    style={{
+                      background: `linear-gradient(90deg, ${project.color}, ${project.color}80, transparent)`,
+                    }}
                   />
                   <div className="p-6 md:p-8">
                     <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-6">
@@ -256,7 +258,7 @@ const ProjectDetailPage = () => {
 
                     {/* Two column: Technical Details + Business Impact */}
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
-                      <div className="bg-background border border-border rounded-xl p-5">
+                      <div className="bg-background border border-border rounded-xl p-5 hover:border-accent/20 transition-colors duration-300">
                         <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
                           <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -265,7 +267,7 @@ const ProjectDetailPage = () => {
                         </h4>
                         <ul className="space-y-2">
                           {feature.technicalDetails.map((detail, i) => (
-                            <li key={i} className="flex items-start gap-2 text-text-secondary text-sm">
+                            <li key={i} className="flex items-start gap-2 text-text-secondary text-sm hover:text-text-primary transition-colors duration-200">
                               <span className="text-accent mt-0.5">▹</span>
                               <span>{detail}</span>
                             </li>
@@ -273,7 +275,7 @@ const ProjectDetailPage = () => {
                         </ul>
                       </div>
 
-                      <div className="bg-background border border-border rounded-xl p-5">
+                      <div className="bg-background border border-border rounded-xl p-5 hover:border-accent/20 transition-colors duration-300">
                         <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
                           <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -282,7 +284,7 @@ const ProjectDetailPage = () => {
                         </h4>
                         <ul className="space-y-2">
                           {feature.businessImpact.map((impact, i) => (
-                            <li key={i} className="flex items-start gap-2 text-text-secondary text-sm">
+                            <li key={i} className="flex items-start gap-2 text-text-secondary text-sm hover:text-text-primary transition-colors duration-200">
                               <span className="text-accent mt-0.5">▹</span>
                               <span>{impact}</span>
                             </li>
@@ -294,11 +296,11 @@ const ProjectDetailPage = () => {
                     {/* Code Example */}
                     {feature.codeExample && (
                       <div className="bg-background border border-border rounded-xl overflow-hidden">
-                        <div className="px-4 py-2 bg-surface border-b border-border flex items-center gap-2">
+                        <div className="px-4 py-2.5 bg-surface border-b border-border flex items-center gap-2">
                           <div className="flex gap-1.5">
-                            <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                            <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                            <div className="w-3 h-3 rounded-full bg-red-500/40" />
+                            <div className="w-3 h-3 rounded-full bg-yellow-500/40" />
+                            <div className="w-3 h-3 rounded-full bg-green-500/40" />
                           </div>
                           <span className="text-xs text-text-secondary font-mono ml-2">
                             {feature.codeExample.language}
@@ -310,7 +312,7 @@ const ProjectDetailPage = () => {
                           </code>
                         </pre>
                         {feature.codeExample.caption && (
-                          <div className="px-4 py-2 border-t border-border">
+                          <div className="px-4 py-2.5 border-t border-border">
                             <p className="text-xs text-text-secondary italic">
                               {feature.codeExample.caption}
                             </p>
@@ -339,18 +341,18 @@ const ProjectDetailPage = () => {
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {project.techStack.map((category) => (
-                  <div 
+                  <div
                     key={category.category}
-                    className="bg-background border border-border rounded-xl p-5"
+                    className="group bg-background border border-border rounded-xl p-5 hover:border-accent/20 transition-all duration-300"
                   >
-                    <h3 className="text-sm font-semibold text-text-primary mb-3">
+                    <h3 className="text-sm font-semibold text-text-primary mb-3 group-hover:text-accent transition-colors duration-300">
                       {category.category}
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {category.items.map((item) => (
                         <span
                           key={item}
-                          className="px-3 py-1.5 text-xs font-mono bg-surface text-text-secondary rounded-lg border border-border"
+                          className="px-3 py-1.5 text-xs font-mono bg-surface text-text-secondary rounded-lg border border-border hover:border-accent/50 hover:text-accent hover:bg-accent/5 transition-all duration-200 cursor-default"
                         >
                           {item}
                         </span>
@@ -375,14 +377,14 @@ const ProjectDetailPage = () => {
                 <span className="w-1.5 h-1.5 bg-accent rounded-full" />
                 Outcomes
               </h2>
-              <div className="bg-surface border border-border rounded-xl p-6 md:p-8">
+              <div className="bg-surface border border-border rounded-xl p-6 md:p-8 hover:border-border-hover transition-colors duration-300">
                 <ul className="space-y-4">
                   {project.outcomes.map((outcome, index) => (
-                    <li key={index} className="flex items-start gap-4">
-                      <span className="flex-shrink-0 w-6 h-6 bg-accent/10 text-accent rounded-full flex items-center justify-center text-sm font-medium">
+                    <li key={index} className="flex items-start gap-4 group/item hover:translate-x-1 transition-transform duration-200">
+                      <span className="flex-shrink-0 w-6 h-6 bg-accent/10 text-accent rounded-full flex items-center justify-center text-sm font-medium group-hover/item:bg-accent/20 transition-colors">
                         ✓
                       </span>
-                      <span className="text-text-secondary">{outcome}</span>
+                      <span className="text-text-secondary group-hover/item:text-text-primary transition-colors duration-200">{outcome}</span>
                     </li>
                   ))}
                 </ul>
@@ -397,9 +399,9 @@ const ProjectDetailPage = () => {
             <a
               href="/#projects"
               onClick={handleBackClick}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-all duration-200 group"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-all duration-300 group shadow-lg shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-0.5"
             >
-              <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               Back to All Projects
